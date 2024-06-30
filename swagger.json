@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DM Enclave",
-    "description": "do the D&D stuff",
+    "description": "Do the D&D stuff",
     "version": "0.0.1"
   },
   "host": "dm-enclave.onrender.com",
