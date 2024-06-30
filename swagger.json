@@ -1,0 +1,206 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DM Enclave",
+    "description": "do the d&d stuff",
+    "version": "0.0.1"
+  },
+  "host": "dm-enclave.onrender.com",
+  "basePath": "/api-docs",
+  "tags": [
+    {
+      "name": "character",
+      "description": "Character sheets. Can be of type player or NPC Belongs to a player or a campaign(if sheet is for NPC)"
+    },
+    {
+      "name": "campaign",
+      "description": "campaigns own players or characters(for NPCs) and belong to DMs."
+    },
+    {
+      "name": "encounter",
+      "description": "encounters belong to campaigns. NPC characters or players belong to encounters."
+    },
+    {
+      "name": "user",
+      "description": "can be of type player or DM, players own sheets and belong to campaigns, DMs own campaigns."
+    }
+  ],
+  "schemes": ["https", "http"],
+  "paths": {
+    "/character": {
+      "post": {
+        "tags": ["character"],
+        "summary": "create a new character record.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the created character record",
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/character/search": {
+      "get": {
+        "tags": ["character"],
+        "summary": "search for a character by name, class, or id",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "class,",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of matching character records",
+            "schema": {
+              "$ref": "#/definitions/CharacterList"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/character/{characterId}": {
+      "get": {
+        "tags": ["character"],
+        "summary": "get a character record by id.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "character record identified by id",
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "put": {
+        "tags": ["character"],
+        "summary": "update a character record by id.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the modified character record",
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["character"],
+        "summary": "delete a character record by id.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the record that was deleted",
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Character": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "class": {
+          "type": "string"
+        },
+        "armorClass": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "CharacterList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Character"
+      }
+    }
+  }
+}
