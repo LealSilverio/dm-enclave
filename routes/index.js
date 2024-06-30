@@ -1,5 +1,9 @@
-const router = require('express').Router();
+import { Router } from "express";
 
-router.get('/', (req, res) => { res.send(
-    `<h1>DM's Enclave!</h1>`
-)});
+const router = Router();
+
+router.get("/", (req, res) => {
+  res.send(`<h1>DM's Enclave!</h1>`);
+});
+
+export default router;
