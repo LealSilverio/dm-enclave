@@ -4,7 +4,6 @@ info:
   description: do the d&d stuff
   version: 0.0.1
 host: dm-enclave.onrender.com
-basePath: /api-docs
 tags:
   - name: character
     description: >-
