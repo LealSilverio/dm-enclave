@@ -149,6 +149,11 @@ definitions:
       armorClass:
         type: integer
         format: int32
+      type:
+        type: string
+        enum:
+          - player
+          - npc
   CharacterList:
     type: array
     items:

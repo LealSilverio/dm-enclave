@@ -193,6 +193,10 @@
         "armorClass": {
           "type": "integer",
           "format": "int32"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["player", "npc"]
         }
       }
     },
