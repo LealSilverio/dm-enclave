@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
 });
 router.use("/api-docs", api);
 router.get("/character/1", (req, res) => {
-  res.send({
+  res.status(200).send({
     name: "Gandalf the Grey",
     class: "Wizard",
     armorClass: 10,
