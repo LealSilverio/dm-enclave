@@ -1,6 +1,6 @@
 # DM-'s Enclave
 
-to build:
+dev build:
 
 ```shell
 pnpm i
@@ -12,7 +12,11 @@ for dev env w/ nodemon:
 pnpm dev
 ```
 
-for prod startup:
+for prod startup, there's now a required build step:
+
+```shell
+pnpm build
+```
 
 ```shell
 pnpm start
