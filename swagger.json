@@ -310,6 +310,14 @@
       "items": {
         "$ref": "#/definitions/Character"
       }
+    },
+    "Campaign": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }
