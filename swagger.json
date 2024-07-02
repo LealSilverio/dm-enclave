@@ -177,9 +177,8 @@
           }
         }
       }
-    }
-  },
-  "/campaign": {
+    },
+    "/campaign": {
       "get": {
         "tags": ["campaign"],
         "summary": "Search for a campaign record.",
@@ -198,32 +197,6 @@
         "responses": {
           "200": {
             "description": "List of campaign records",
-            "schema": {
-              "$ref": "#/definitions/Campaign"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-    },
-    "/campaign/{campaignId}": {
-      "get": {
-        "tags": ["campaign"],
-        "summary": "Get a campaign record by id.",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "campaignId",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Campaign record identified by id",
             "schema": {
               "$ref": "#/definitions/Campaign"
             }
@@ -259,6 +232,32 @@
         }
       }
     },
+    "/campaign/{campaignId}": {
+      "get": {
+        "tags": ["campaign"],
+        "summary": "Get a campaign record by id.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Campaign record identified by id",
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
       "delete": {
         "tags": ["campaign"],
         "summary": "Delete a campaign record by id.",
@@ -283,7 +282,9 @@
             "description": "bad request"
           }
         }
-      },
+      }
+    }
+  },
   "definitions": {
     "Character": {
       "type": "object",
