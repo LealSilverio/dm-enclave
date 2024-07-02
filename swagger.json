@@ -318,6 +318,35 @@
           "type": "string"
         }
       }
+    },
+    "CampaignList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Campaign"
+      }
+    },
+    "Encounter": {
+
+    },
+    "EncounterList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Encounter"
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "UserList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/User"
+      }
     }
   }
 }
