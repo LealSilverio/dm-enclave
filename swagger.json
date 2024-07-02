@@ -13,15 +13,15 @@
     },
     {
       "name": "campaign",
-      "description": "campaigns own players or characters(for NPCs) and belong to DMs."
+      "description": "Campaigns own players or characters(for NPCs) and belong to DMs."
     },
     {
       "name": "encounter",
-      "description": "encounters belong to campaigns. NPC characters or players belong to encounters."
+      "description": "Encounters belong to campaigns. NPC characters or players belong to encounters."
     },
     {
       "name": "user",
-      "description": "can be of type player or DM, players own sheets and belong to campaigns, DMs own campaigns."
+      "description": "Can be of type player or DM, players own sheets and belong to campaigns, DMs own campaigns."
     }
   ],
   "schemes": ["https", "http"],
@@ -29,7 +29,7 @@
     "/character": {
       "post": {
         "tags": ["character"],
-        "summary": "create a new character record.",
+        "summary": "Create a new character record.",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "parameters": [
@@ -44,7 +44,7 @@
         ],
         "responses": {
           "200": {
-            "description": "the created character record",
+            "description": "The created character record",
             "schema": {
               "$ref": "#/definitions/Character"
             }
@@ -58,7 +58,7 @@
     "/character/search": {
       "get": {
         "tags": ["character"],
-        "summary": "search for a character by name, class, or id",
+        "summary": "Search for a character by name, class, or id",
         "produces": ["application/json"],
         "consumes": ["application/json"],
         "parameters": [
@@ -81,7 +81,7 @@
         ],
         "responses": {
           "200": {
-            "description": "list of matching character records",
+            "description": "List of matching character records",
             "schema": {
               "$ref": "#/definitions/CharacterList"
             }
@@ -95,7 +95,7 @@
     "/character/{characterId}": {
       "get": {
         "tags": ["character"],
-        "summary": "get a character record by id.",
+        "summary": "Get a character record by id.",
         "produces": ["application/json"],
         "parameters": [
           {
@@ -108,7 +108,7 @@
         ],
         "responses": {
           "200": {
-            "description": "character record identified by id",
+            "description": "Character record identified by id",
             "schema": {
               "$ref": "#/definitions/Character"
             }
@@ -120,7 +120,7 @@
       },
       "put": {
         "tags": ["character"],
-        "summary": "update a character record by id.",
+        "summary": "Update a character record by id.",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "parameters": [
@@ -142,7 +142,7 @@
         ],
         "responses": {
           "200": {
-            "description": "the modified character record",
+            "description": "The modified character record",
             "schema": {
               "$ref": "#/definitions/Character"
             }
@@ -154,7 +154,7 @@
       },
       "delete": {
         "tags": ["character"],
-        "summary": "delete a character record by id.",
+        "summary": "Delete a character record by id.",
         "produces": ["application/json"],
         "parameters": [
           {
@@ -167,7 +167,7 @@
         ],
         "responses": {
           "200": {
-            "description": "the record that was deleted",
+            "description": "The record that was deleted",
             "schema": {
               "$ref": "#/definitions/Character"
             }
