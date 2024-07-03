@@ -24,14 +24,23 @@
       "description": "Can be of type player or DM, players own sheets and belong to campaigns, DMs own campaigns."
     }
   ],
-  "schemes": ["https", "http"],
+  "schemes": [
+    "https",
+    "http"
+  ],
   "paths": {
     "/character": {
       "post": {
-        "tags": ["character"],
+        "tags": [
+          "character"
+        ],
         "summary": "Create a new character record.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -57,10 +66,16 @@
     },
     "/character/search": {
       "get": {
-        "tags": ["character"],
+        "tags": [
+          "character"
+        ],
         "summary": "Search for a character by name, class, or id",
-        "produces": ["application/json"],
-        "consumes": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "name",
@@ -94,9 +109,13 @@
     },
     "/character/{characterId}": {
       "get": {
-        "tags": ["character"],
+        "tags": [
+          "character"
+        ],
         "summary": "Get a character record by id.",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "characterId",
@@ -119,10 +138,16 @@
         }
       },
       "put": {
-        "tags": ["character"],
+        "tags": [
+          "character"
+        ],
         "summary": "Update a character record by id.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "characterId",
@@ -153,9 +178,13 @@
         }
       },
       "delete": {
-        "tags": ["character"],
+        "tags": [
+          "character"
+        ],
         "summary": "Delete a character record by id.",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "characterId",
@@ -178,12 +207,18 @@
         }
       }
     },
-    "/campaign": {
+    "/campaign/": {
       "get": {
-        "tags": ["campaign"],
+        "tags": [
+          "campaign"
+        ],
         "summary": "Search for a campaign record.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -207,16 +242,21 @@
         }
       },
       "post": {
-        "tags": ["campaign"],
+        "tags": [
+          "campaign"
+        ],
         "summary": "Create a campaign record.",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "campaignId",
-            "in": "path",
+            "in": "body",
+            "name": "body",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
           }
         ],
         "responses": {
@@ -234,9 +274,13 @@
     },
     "/campaign/{campaignId}": {
       "get": {
-        "tags": ["campaign"],
+        "tags": [
+          "campaign"
+        ],
         "summary": "Get a campaign record by id.",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "campaignId",
@@ -259,9 +303,13 @@
         }
       },
       "delete": {
-        "tags": ["campaign"],
+        "tags": [
+          "campaign"
+        ],
         "summary": "Delete a campaign record by id.",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "campaignId",
@@ -301,7 +349,10 @@
         },
         "type": {
           "type": "string",
-          "enum": ["player", "npc"]
+          "enum": [
+            "player",
+            "npc"
+          ]
         }
       }
     },
@@ -325,9 +376,7 @@
         "$ref": "#/definitions/Campaign"
       }
     },
-    "Encounter": {
-
-    },
+    "Encounter": {},
     "EncounterList": {
       "type": "array",
       "items": {
