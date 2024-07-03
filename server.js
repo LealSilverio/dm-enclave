@@ -1,5 +1,5 @@
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
 import "dotenv/config";
 import routes from "./routes/index";
 // import db from "./db/database";
