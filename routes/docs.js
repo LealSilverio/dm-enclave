@@ -6,7 +6,6 @@ const require = createRequire(import.meta.url);
 const router = Router();
 
 router.use("/", swaggerUi.serve);
-//router.get("/", swaggerUi.setup(require("../swagger.json")));
-router.get("/", swaggerUi.setup(require("../swagger-temp.yaml")));
+router.get("/", swaggerUi.setup(require("../swagger.json")));
 
 export default router;
