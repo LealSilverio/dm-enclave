@@ -4,12 +4,12 @@ import { Character } from "../types/character";
 const performSave = async (
   entity: HydratedDocument<Character>,
   success: (record?: Document) => void,
-  fail: (e: any) => void
+  fail: (e: Error) => void
 ) => {
   try {
     const savedRecord = await entity.save();
     if (!savedRecord) {
-      fail({ message: "failure from inside perform save" });
+      fail(new Error("failure from inside perform save"));
     }
     success(savedRecord);
     return savedRecord;

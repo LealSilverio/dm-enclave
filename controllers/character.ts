@@ -12,7 +12,7 @@ const createCharacter = async (req: Request, res: Response) => {
   };
   const character = new CharacterModel(newChar);
   const success = (record: Document) => res.status(200).json(record);
-  const fail = (e: any) => sendFailRes(res, e);
+  const fail = (e: Error) => sendFailRes(res, e);
   await performSave(character, success, fail);
 };
 
