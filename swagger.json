@@ -24,14 +24,23 @@
       "description": "Can be of type player or DM, players own sheets and belong to campaigns, DMs own campaigns."
     }
   ],
-  "schemes": ["https", "http"],
+  "schemes": [
+    "https",
+    "http"
+  ],
   "paths": {
     "/character": {
       "post": {
-        "tags": ["character"],
+        "tags": [
+          "character"
+        ],
         "summary": "Create a new character record.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -57,10 +66,16 @@
     },
     "/character/search": {
       "get": {
-        "tags": ["character"],
+        "tags": [
+          "character"
+        ],
         "summary": "Search for a character by name, class, or id",
-        "produces": ["application/json"],
-        "consumes": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "name",
@@ -94,9 +109,13 @@
     },
     "/character/{characterId}": {
       "get": {
-        "tags": ["character"],
+        "tags": [
+          "character"
+        ],
         "summary": "Get a character record by id.",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "characterId",
@@ -119,10 +138,16 @@
         }
       },
       "put": {
-        "tags": ["character"],
+        "tags": [
+          "character"
+        ],
         "summary": "Update a character record by id.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "characterId",
@@ -153,9 +178,13 @@
         }
       },
       "delete": {
-        "tags": ["character"],
+        "tags": [
+          "character"
+        ],
         "summary": "Delete a character record by id.",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "characterId",
@@ -170,6 +199,131 @@
             "description": "The record that was deleted",
             "schema": {
               "$ref": "#/definitions/Character"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/campaign/": {
+      "get": {
+        "tags": [
+          "campaign"
+        ],
+        "summary": "Search for a campaign record.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of campaign records",
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "campaign"
+        ],
+        "summary": "Create a campaign record.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The record that was created",
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/campaign/{campaignId}": {
+      "get": {
+        "tags": [
+          "campaign"
+        ],
+        "summary": "Get a campaign record by id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Campaign record identified by id",
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "campaign"
+        ],
+        "summary": "Delete a campaign record by id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The record that was deleted",
+            "schema": {
+              "$ref": "#/definitions/Campaign"
             }
           },
           "400": {
@@ -195,7 +349,10 @@
         },
         "type": {
           "type": "string",
-          "enum": ["player", "npc"]
+          "enum": [
+            "player",
+            "npc"
+          ]
         }
       }
     },
@@ -203,6 +360,41 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/Character"
+      }
+    },
+    "Campaign": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "CampaignList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Campaign"
+      }
+    },
+    "Encounter": {},
+    "EncounterList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Encounter"
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "UserList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/User"
       }
     }
   }

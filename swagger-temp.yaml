@@ -1,7 +1,7 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
   title: DM Enclave
-  description: do the d&d stuff
+  description: Do the D&D stuff
   version: 0.0.1
 host: dm-enclave.onrender.com
 tags:
@@ -10,14 +10,14 @@ tags:
       Character sheets. Can be of type player or NPC Belongs to a player or a
       campaign(if sheet is for NPC)
   - name: campaign
-    description: campaigns own players or characters(for NPCs) and belong to DMs.
+    description: Campaigns own players or characters(for NPCs) and belong to DMs.
   - name: encounter
     description: >-
-      encounters belong to campaigns. NPC characters or players belong to
+      Encounters belong to campaigns. NPC characters or players belong to
       encounters.
   - name: user
     description: >-
-      can be of type player or DM, players own sheets and belong to campaigns,
+      Can be of type player or DM, players own sheets and belong to campaigns,
       DMs own campaigns.
 schemes:
   - https
@@ -27,7 +27,7 @@ paths:
     post:
       tags:
         - character
-      summary: create a new character record.
+      summary: Create a new character record.
       consumes:
         - application/json
       produces:
@@ -37,19 +37,19 @@ paths:
           name: body
           required: true
           schema:
-            $ref: "#/definitions/Character"
+            $ref: '#/definitions/Character'
       responses:
-        "200":
-          description: the created character record
+        '200':
+          description: The created character record
           schema:
-            $ref: "#/definitions/Character"
-        "400":
+            $ref: '#/definitions/Character'
+        '400':
           description: bad request
   /character/search:
     get:
       tags:
         - character
-      summary: search for a character by name, class, or id
+      summary: Search for a character by name, class, or id
       produces:
         - application/json
       consumes:
@@ -66,17 +66,17 @@ paths:
           required: false
           type: string
       responses:
-        "200":
-          description: list of matching character records
+        '200':
+          description: List of matching character records
           schema:
-            $ref: "#/definitions/CharacterList"
-        "400":
+            $ref: '#/definitions/CharacterList'
+        '400':
           description: bad request
   /character/{characterId}:
     get:
       tags:
         - character
-      summary: get a character record by id.
+      summary: Get a character record by id.
       produces:
         - application/json
       parameters:
@@ -86,16 +86,16 @@ paths:
           type: integer
           format: int64
       responses:
-        "200":
-          description: character record identified by id
+        '200':
+          description: Character record identified by id
           schema:
-            $ref: "#/definitions/Character"
-        "400":
+            $ref: '#/definitions/Character'
+        '400':
           description: bad request
     put:
       tags:
         - character
-      summary: update a character record by id.
+      summary: Update a character record by id.
       consumes:
         - application/json
       produces:
@@ -110,18 +110,18 @@ paths:
           name: body
           required: true
           schema:
-            $ref: "#/definitions/Character"
+            $ref: '#/definitions/Character'
       responses:
-        "200":
-          description: the modified character record
+        '200':
+          description: The modified character record
           schema:
-            $ref: "#/definitions/Character"
-        "400":
+            $ref: '#/definitions/Character'
+        '400':
           description: bad request
     delete:
       tags:
         - character
-      summary: delete a character record by id.
+      summary: Delete a character record by id.
       produces:
         - application/json
       parameters:
@@ -131,11 +131,91 @@ paths:
           type: integer
           format: int64
       responses:
-        "200":
-          description: the record that was deleted
+        '200':
+          description: The record that was deleted
           schema:
-            $ref: "#/definitions/Character"
-        "400":
+            $ref: '#/definitions/Character'
+        '400':
+          description: bad request
+  /campaign/:
+    get:
+      tags:
+        - campaign
+      summary: Search for a campaign record.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Campaign'
+      responses:
+        '200':
+          description: List of campaign records
+          schema:
+            $ref: '#/definitions/Campaign'
+        '400':
+          description: bad request
+    post:
+      tags:
+        - campaign
+      summary: Create a campaign record.
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema: 
+            $ref: "#/definitions/Campaign"
+      responses:
+        '200':
+          description: The record that was created
+          schema:
+            $ref: '#/definitions/Campaign'
+        '400':
+          description: bad request
+  /campaign/{campaignId}:
+    get:
+      tags:
+        - campaign
+      summary: Get a campaign record by id.
+      produces:
+        - application/json
+      parameters:
+        - name: campaignId
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Campaign record identified by id
+          schema:
+            $ref: '#/definitions/Campaign'
+        '400':
+          description: bad request
+    delete:
+      tags:
+        - campaign
+      summary: Delete a campaign record by id.
+      produces:
+        - application/json
+      parameters:
+        - name: campaignId
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: The record that was deleted
+          schema:
+            $ref: '#/definitions/Campaign'
+        '400':
           description: bad request
 definitions:
   Character:
@@ -156,4 +236,27 @@ definitions:
   CharacterList:
     type: array
     items:
-      $ref: "#/definitions/Character"
+      $ref: '#/definitions/Character'
+  Campaign:
+    type: object
+    properties:
+      name:
+        type: string
+  CampaignList:
+    type: array
+    items:
+      $ref: '#/definitions/Campaign'
+  Encounter: {}
+  EncounterList:
+    type: array
+    items:
+      $ref: '#/definitions/Encounter'
+  User:
+    type: object
+    properties:
+      name:
+        type: string
+  UserList:
+    type: array
+    items:
+      $ref: '#/definitions/User'
