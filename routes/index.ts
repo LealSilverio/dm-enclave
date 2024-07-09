@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express";
 import api from "./docs";
+import { createCharacter } from "../controllers/character";
 
 const router = Router();
 
@@ -19,5 +20,6 @@ const get1Character = (req: Request, res: Response) => {
 router.get("/", welcomeMsg);
 router.use("/api-docs", api);
 router.get("/character/1", get1Character);
+router.post("/character", createCharacter);
 
 export default router;

@@ -21,3 +21,5 @@ pnpm build
 ```shell
 pnpm start
 ```
+
+For DB integration, a MONGO_ATLAS_URI env var in the format `mongodb+srv://{user}:{url-encoded password}@{cluster}.{domain}/{collection}?retryWrites=true&w=majority&appName={cluster}` is needed.

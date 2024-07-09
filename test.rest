@@ -1,0 +1,13 @@
+@devHost = http://localhost:5000
+
+POST {{devHost}}/character HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Josh the Flatulent",
+  "level": 1,
+  "charClass": "Fighter",
+  "race": "Human",
+  "type": "player",
+  "ownerId": "000000000000000000000000"
+}
