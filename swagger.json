@@ -84,12 +84,14 @@
             "type": "string"
           },
           {
-            "name": "class,",
+            "name": "class",
+            "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "id",
+            "in": "query",
             "required": false,
             "type": "string"
           }
