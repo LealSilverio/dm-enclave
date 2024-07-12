@@ -6,19 +6,13 @@ info:
 host: dm-enclave.onrender.com
 tags:
   - name: character
-    description: >-
-      Character sheets. Can be of type player or NPC Belongs to a player or a
-      campaign(if sheet is for NPC)
+    description: Character sheets. Can be of type player or NPC Belongs to a player or a campaign(if sheet is for NPC)
   - name: campaign
     description: Campaigns own players or characters(for NPCs) and belong to DMs.
   - name: encounter
-    description: >-
-      Encounters belong to campaigns. NPC characters or players belong to
-      encounters.
+    description: Encounters belong to campaigns. NPC characters or players belong to encounters.
   - name: user
-    description: >-
-      Can be of type player or DM, players own sheets and belong to campaigns,
-      DMs own campaigns.
+    description: Can be of type player or DM, players own sheets and belong to campaigns, DMs own campaigns.
 schemes:
   - https
   - http
@@ -59,10 +53,12 @@ paths:
           in: query
           required: false
           type: string
-        - name: class,
+        - name: class
+          in: query
           required: false
           type: string
         - name: id
+          in: query
           required: false
           type: string
       responses:
@@ -169,8 +165,8 @@ paths:
         - in: body
           name: body
           required: true
-          schema: 
-            $ref: "#/definitions/Campaign"
+          schema:
+            $ref: '#/definitions/Campaign'
       responses:
         '200':
           description: The record that was created
