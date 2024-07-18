@@ -399,6 +399,44 @@
         }
       }
     },
+    "/encounter/search": {
+      "get": {
+        "tags": [
+          "encounter"
+        ],
+        "summary": "Search for an Encounter by name or id",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of matching Encounter records",
+            "schema": {
+              "$ref": "#/definitions/EncounterList"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
     "/encounter/{encounterId}": {
       "get": {
         "tags": [
@@ -451,44 +489,6 @@
             "description": "The record that was deleted",
             "schema": {
               "$ref": "#/definitions/Encounter"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      }
-    },
-    "/encounter/search": {
-      "get": {
-        "tags": [
-          "encounter"
-        ],
-        "summary": "Search for an Encounter by name or id",
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of matching Encounter records",
-            "schema": {
-              "$ref": "#/definitions/EncounterList"
             }
           },
           "400": {
