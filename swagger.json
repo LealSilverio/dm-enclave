@@ -651,7 +651,7 @@
       },
       "put": {
         "tags": [
-          "encoutner"
+          "encounter"
         ],
         "summary": "Update an encounter record by id.",
         "consumes": [
