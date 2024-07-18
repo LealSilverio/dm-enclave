@@ -34,36 +34,13 @@
         "tags": [
           "character"
         ],
-        "summary": "Search for all characters",
+        "summary": "Get all characters",
         "produces": [
           "application/json"
         ],
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "class",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
-            "description": "List of matching character records",
+            "description": "List of all character records",
             "schema": {
               "$ref": "#/definitions/CharacterList"
             }
@@ -290,22 +267,9 @@
         "tags": [
           "campaign"
         ],
-        "summary": "Search for a campaign record.",
-        "consumes": [
-          "application/json"
-        ],
+        "summary": "Get all campaign records.",
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Campaign"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -527,21 +491,8 @@
           "encounter"
         ],
         "summary": "Search for an Encounter record.",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Encounter"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -765,23 +716,6 @@
         "summary": "Search for all users",
         "produces": [
           "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
         ],
         "responses": {
           "200": {
