@@ -331,6 +331,169 @@
           }
         }
       }
+    },
+    "/encounter/": {
+      "get": {
+        "tags": [
+          "encounter"
+        ],
+        "summary": "Search for an Encounter record.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Encounter records",
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "campaign"
+        ],
+        "summary": "Create an Encounter record.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The record that was created",
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/encounter/{encounterId}": {
+      "get": {
+        "tags": [
+          "encounter"
+        ],
+        "summary": "Get an Encounter record by id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "encounterId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Encounter record identified by id",
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "encounter"
+        ],
+        "summary": "Delete an encounter record by id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "encounterId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The record that was deleted",
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/encounter/search": {
+      "get": {
+        "tags": [
+          "encounter"
+        ],
+        "summary": "Search for an Encounter by name or id",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of matching Encounter records",
+            "schema": {
+              "$ref": "#/definitions/EncounterList"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
     }
   },
   "definitions": {
