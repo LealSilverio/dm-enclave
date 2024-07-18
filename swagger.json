@@ -30,6 +30,49 @@
   ],
   "paths": {
     "/character": {
+      "get": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Search for all characters",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "class",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of matching character records",
+            "schema": {
+              "$ref": "#/definitions/CharacterList"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
       "post": {
         "tags": [
           "character"
@@ -54,6 +97,39 @@
         "responses": {
           "200": {
             "description": "The created character record",
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Update a character record.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated character record",
             "schema": {
               "$ref": "#/definitions/Character"
             }
