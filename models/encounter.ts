@@ -10,7 +10,7 @@ const EncounterSchema = new mongoose.Schema<Encounter>({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
-  }
+  },
 });
 
 const EncounterModel = mongoose.model("Encounter", EncounterSchema);

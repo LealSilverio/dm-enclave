@@ -1,8 +1,8 @@
 import { HydratedDocument, Document } from "mongoose";
-import { Character } from "../types/character";
+import { Encounter } from "../types/encounter";
 
-const performSave = async (
-  entity: HydratedDocument<Character>,
+const performEncSave = async (
+  entity: HydratedDocument<Encounter>,
   success: (record?: Document) => void,
   fail: (e: Error) => void
 ) => {
@@ -19,4 +19,4 @@ const performSave = async (
   }
 };
 
-export default performSave;
+export default performEncSave;
