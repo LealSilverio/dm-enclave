@@ -348,6 +348,39 @@
             "description": "bad request"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "campaign"
+        ],
+        "summary": "Update a campaign record.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated campaign record",
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
       }
     },
     "/campaign/{campaignId}": {
@@ -371,6 +404,46 @@
         "responses": {
           "200": {
             "description": "Campaign record identified by id",
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "campaign"
+        ],
+        "summary": "Update a campaign record by id.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The modified campaign record",
             "schema": {
               "$ref": "#/definitions/Campaign"
             }
@@ -473,6 +546,39 @@
             "description": "bad request"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "encounter"
+        ],
+        "summary": "Update an encounter record.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated encounter record",
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
       }
     },
     "/encounter/search": {
@@ -534,6 +640,46 @@
         "responses": {
           "200": {
             "description": "Encounter record identified by id",
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "encoutner"
+        ],
+        "summary": "Update an encounter record by id.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "encounterId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The modified encounter record",
             "schema": {
               "$ref": "#/definitions/Encounter"
             }
