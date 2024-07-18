@@ -541,7 +541,14 @@
         "$ref": "#/definitions/Campaign"
       }
     },
-    "Encounter": {},
+    "Encounter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "EncounterList": {
       "type": "array",
       "items": {
