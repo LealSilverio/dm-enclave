@@ -383,6 +383,44 @@
         }
       }
     },
+    "/campaign/search": {
+      "get": {
+        "tags": [
+          "campaign"
+        ],
+        "summary": "Search for a campaign by name or id",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of matching Campaign records",
+            "schema": {
+              "$ref": "#/definitions/CampaignList"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
     "/campaign/{campaignId}": {
       "get": {
         "tags": [
