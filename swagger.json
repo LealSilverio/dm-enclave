@@ -370,7 +370,7 @@
       },
       "post": {
         "tags": [
-          "campaign"
+          "encounter"
         ],
         "summary": "Create an Encounter record.",
         "produces": [
