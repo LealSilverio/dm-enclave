@@ -27,6 +27,17 @@ const getSingle = async (req: Request, res: Response) => {
   // await performCharSave(character, success, fail);
 };
 
+const searchSingle = async (req: Request, res: Response) => {
+  // const newChar = {
+  //   ...req.body,
+  //   ownerId: ObjectId.createFromHexString(req.body.ownerId),
+  // };
+  // const character = new CharacterModel(newChar);
+  // const success = (record: Document) => res.status(200).json(record);
+  // const fail = (e: Error) => sendFailRes(res, e);
+  // await performCharSave(character, success, fail);
+};
+
 const createCharacter = async (req: Request, res: Response) => {
   const newChar = {
     ...req.body,
@@ -60,4 +71,4 @@ const deleteCharacter = async (req: Request, res: Response) => {
   // await performCharSave(character, success, fail);
 };
 
-export { getAll, getSingle, createCharacter, updateCharacter, deleteCharacter };
+export { getAll, getSingle, searchSingle, createCharacter, updateCharacter, deleteCharacter };
