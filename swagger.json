@@ -490,7 +490,7 @@
         "tags": [
           "encounter"
         ],
-        "summary": "Search for an Encounter record.",
+        "summary": "Get all Encounter records.",
         "produces": [
           "application/json"
         ],
@@ -713,7 +713,7 @@
         "tags": [
           "user"
         ],
-        "summary": "Search for all users",
+        "summary": "Get all users",
         "produces": [
           "application/json"
         ],
