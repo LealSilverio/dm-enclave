@@ -34,13 +34,36 @@
         "tags": [
           "character"
         ],
-        "summary": "Get all characters",
+        "summary": "Search for all characters",
         "produces": [
           "application/json"
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "class",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "List of all character records",
+            "description": "List of matching character records",
             "schema": {
               "$ref": "#/definitions/CharacterList"
             }
@@ -74,39 +97,6 @@
         "responses": {
           "200": {
             "description": "The created character record",
-            "schema": {
-              "$ref": "#/definitions/Character"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "character"
-        ],
-        "summary": "Update a character record.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Character"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The updated character record",
             "schema": {
               "$ref": "#/definitions/Character"
             }
@@ -154,6 +144,39 @@
             "description": "List of matching character records",
             "schema": {
               "$ref": "#/definitions/CharacterList"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Update a character record.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated character record",
+            "schema": {
+              "$ref": "#/definitions/Character"
             }
           },
           "400": {
@@ -267,9 +290,22 @@
         "tags": [
           "campaign"
         ],
-        "summary": "Get all campaign records.",
+        "summary": "Search for a campaign record.",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -312,39 +348,6 @@
             "description": "bad request"
           }
         }
-      },
-      "put": {
-        "tags": [
-          "campaign"
-        ],
-        "summary": "Update a campaign record.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Campaign"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The updated campaign record",
-            "schema": {
-              "$ref": "#/definitions/Campaign"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
       }
     },
     "/campaign/search": {
@@ -377,6 +380,39 @@
             "description": "List of matching Campaign records",
             "schema": {
               "$ref": "#/definitions/CampaignList"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "campaign"
+        ],
+        "summary": "Update a campaign record.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated campaign record",
+            "schema": {
+              "$ref": "#/definitions/Campaign"
             }
           },
           "400": {
@@ -490,9 +526,22 @@
         "tags": [
           "encounter"
         ],
-        "summary": "Get all Encounter records.",
+        "summary": "Search for an Encounter record.",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -535,39 +584,6 @@
             "description": "bad request"
           }
         }
-      },
-      "put": {
-        "tags": [
-          "encounter"
-        ],
-        "summary": "Update an encounter record.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Encounter"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The updated encounter record",
-            "schema": {
-              "$ref": "#/definitions/Encounter"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
       }
     },
     "/encounter/search": {
@@ -600,6 +616,39 @@
             "description": "List of matching Encounter records",
             "schema": {
               "$ref": "#/definitions/EncounterList"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "encounter"
+        ],
+        "summary": "Update an encounter record.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated encounter record",
+            "schema": {
+              "$ref": "#/definitions/Encounter"
             }
           },
           "400": {
@@ -713,9 +762,26 @@
         "tags": [
           "user"
         ],
-        "summary": "Get all users",
+        "summary": "Search for all users",
         "produces": [
           "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -753,39 +819,6 @@
         "responses": {
           "200": {
             "description": "The created user record",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Update a user record.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The updated user record",
             "schema": {
               "$ref": "#/definitions/User"
             }
@@ -833,6 +866,39 @@
             "description": "bad request"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update a user record.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated user record",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
       }
     },
     "/user/logout": {
@@ -866,6 +932,39 @@
             "description": "List of matching user records",
             "schema": {
               "$ref": "#/definitions/UserList"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update a user record.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated user record",
+            "schema": {
+              "$ref": "#/definitions/User"
             }
           },
           "400": {
