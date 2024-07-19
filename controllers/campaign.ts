@@ -5,6 +5,28 @@ import performCampSave from "../db/saveCamp";
 import { sendFailRes } from "./utils";
 import { Document } from "mongoose";
 
+const getAll = async (req: Request, res: Response) => {
+  // const newCamp = {
+  //   ...req.body,
+  //   ownerId: ObjectId.createFromHexString(req.body.ownerId),
+  // };
+  // const campaign = new CampaignModel(newCamp);
+  // const success = (record: Document) => res.status(200).json(record);
+  // const fail = (e: Error) => sendFailRes(res, e);
+  // await performCampSave(campaign, success, fail);
+};
+
+const getSingle = async (req: Request, res: Response) => {
+  // const newCamp = {
+  //   ...req.body,
+  //   ownerId: ObjectId.createFromHexString(req.body.ownerId),
+  // };
+  // const campaign = new CampaignModel(newCamp);
+  // const success = (record: Document) => res.status(200).json(record);
+  // const fail = (e: Error) => sendFailRes(res, e);
+  // await performCampSave(campaign, success, fail);
+};
+
 const createCampaign = async (req: Request, res: Response) => {
   const newCamp = {
     ...req.body,
@@ -16,4 +38,26 @@ const createCampaign = async (req: Request, res: Response) => {
   await performCampSave(campaign, success, fail);
 };
 
-export { createCampaign };
+const updateCampaign = async (req: Request, res: Response) => {
+  // const newCamp = {
+  //   ...req.body,
+  //   ownerId: ObjectId.createFromHexString(req.body.ownerId),
+  // };
+  // const campaign = new CampaignModel(newCamp);
+  // const success = (record: Document) => res.status(200).json(record);
+  // const fail = (e: Error) => sendFailRes(res, e);
+  // await performCampSave(campaign, success, fail);
+};
+
+const deleteCampaign = async (req: Request, res: Response) => {
+  // const newCamp = {
+  //   ...req.body,
+  //   ownerId: ObjectId.createFromHexString(req.body.ownerId),
+  // };
+  // const campaign = new CampaignModel(newCamp);
+  // const success = (record: Document) => res.status(200).json(record);
+  // const fail = (e: Error) => sendFailRes(res, e);
+  // await performCampSave(campaign, success, fail);
+};
+
+export { getAll, getSingle, createCampaign, updateCampaign, deleteCampaign };
