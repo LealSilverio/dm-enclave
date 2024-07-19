@@ -6,7 +6,12 @@ import { sendFailRes } from "./utils";
 import { Document } from "mongoose";
 
 const getAll = async (req: Request, res: Response) => {
-  const result = await mongoose.getDb().db().collections("characters").find();
+  try {
+    const result = await CharacterModel.find();
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 const getSingle = async (req: Request, res: Response) => {

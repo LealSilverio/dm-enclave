@@ -13,3 +13,6 @@ content-type: application/json
   "type": "player",
   "ownerId": "000000000000000000000000"
 }
+
+###
+GET {{devHost}}/character

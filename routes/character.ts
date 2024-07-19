@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { createCharacter } from "../controllers/character";
+import { getAll, getSingle, searchSingle, createCharacter, updateCharacter, deleteCharacter } from "../controllers/character";
 const router = Router();
 
 const get1Character = (req: Request, res: Response) => {
@@ -12,5 +12,7 @@ const get1Character = (req: Request, res: Response) => {
 };
 router.get("/1", get1Character);
 router.post("/", createCharacter);
+
+router.get("/", getAll);
 
 export default router;
