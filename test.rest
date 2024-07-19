@@ -24,7 +24,7 @@ GET {{devHost}}/character/1
 GET {{devHost}}/character/search
 
 ###
-POST {{devHost}}/character/1
+POST {{devHost}}/character/2
 content-type: application/json
 
 {
@@ -37,7 +37,7 @@ content-type: application/json
 }
 
 ###
-PUT {{devHost}}/character/1
+PUT {{devHost}}/character/2
 content-type: application/json
 
 {
@@ -50,4 +50,4 @@ content-type: application/json
 }
 
 ###
-DELETE {{devHost}}/character/1
+DELETE {{devHost}}/character/2
