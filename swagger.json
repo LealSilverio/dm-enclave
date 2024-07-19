@@ -733,7 +733,7 @@
         "tags": [
           "user"
         ],
-        "summary": "Update a user record by username.",
+        "summary": "Update a user record.",
         "consumes": [
           "application/json"
         ],
@@ -775,7 +775,7 @@
         "tags": [
           "user"
         ],
-        "summary": "Create a new user record.",
+        "summary": "Create a new user.",
         "consumes": [
           "application/json"
         ],
