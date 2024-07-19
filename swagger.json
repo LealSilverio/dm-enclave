@@ -34,7 +34,7 @@
         "tags": [
           "character"
         ],
-        "summary": "Search for all characters",
+        "summary": "Get all characters",
         "produces": [
           "application/json"
         ],
@@ -290,7 +290,7 @@
         "tags": [
           "campaign"
         ],
-        "summary": "Search for a campaign record.",
+        "summary": "Get all campaign records.",
         "consumes": [
           "application/json"
         ],
@@ -526,7 +526,7 @@
         "tags": [
           "encounter"
         ],
-        "summary": "Search for an Encounter record.",
+        "summary": "Get all Encounter records.",
         "consumes": [
           "application/json"
         ],
@@ -762,7 +762,7 @@
         "tags": [
           "user"
         ],
-        "summary": "Search for all users",
+        "summary": "Get all users",
         "produces": [
           "application/json"
         ],
