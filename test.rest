@@ -24,7 +24,7 @@ GET {{devHost}}/character/1
 GET {{devHost}}/character/search
 
 ###
-POST {{devHost}}/character/2
+POST {{devHost}}/character/
 content-type: application/json
 
 {
@@ -37,7 +37,7 @@ content-type: application/json
 }
 
 ###
-PUT {{devHost}}/character/2
+PUT {{devHost}}/character/6699f2afdc9e2198e1070f18
 content-type: application/json
 
 {
@@ -46,8 +46,8 @@ content-type: application/json
   "charClass": "Fighter",
   "race": "Human",
   "type": "player",
-  "ownerId": "000000000000000000000000"
+  "ownerId": "000000000000000000000002"
 }
 
 ###
-DELETE {{devHost}}/character/2
+DELETE {{devHost}}/character/6699ec45b700814bef7f3d2e

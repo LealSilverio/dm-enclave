@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import CharacterModel from "../models/character";
-import { Request, Response } from "express";
+import { Request, response, Response } from "express";
 import performSave from "../db/save";
 import { sendFailRes } from "./utils";
 import { Document } from "mongoose";
@@ -25,7 +25,7 @@ const getSingle = async (req: Request, res: Response) => {
 
 const searchSingle = async (req: Request, res: Response) => {
   try {
-    const searchData = await CharacterModel.find(req.query).exec();
+    const searchData = await CharacterModel.find({ charClass: req.query }).exec();
     res.json(searchData);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -56,12 +56,15 @@ const updateCharacter = async (req: Request, res: Response) => {
 };
 
 const deleteCharacter = async (req: Request, res: Response) => {
+  const charId = req.params.id;
+
   try {
-    const deletedData = await CharacterModel.findByIdAndDelete(req.params.id);
-    if (!deletedData) {
-      return res.status(404).json({ message: 'Data not found' });
+    const deletedData = await CharacterModel.deleteOne({ _id: charId });
+    if (deletedData.deletedCount === 0) {
+      return res.status(400).json({ message: 'Character not found' });
     }
-    res.json({ message: 'Data deleted successfully' });
+
+    res.json({ message: 'Character deleted successfully.' });
   } catch (error) { 
     res.status(500).json({ message: error.message });
   }

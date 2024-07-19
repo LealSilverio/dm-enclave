@@ -15,9 +15,9 @@ router.get("/1", get1Character);
 
 router.get("/", getAll);
 router.get("/", getSingle);
-router.get("/search", searchSingle);
-router.post("/{characterId}", createCharacter);
-router.put("/{characterId}", updateCharacter);
-router.delete("/{characterId}", deleteCharacter);
+router.get("/search?charClass=Fighter", searchSingle);
+router.post("/", createCharacter);
+router.put("/:id", updateCharacter);
+router.delete("/:id", deleteCharacter);
 
 export default router;
