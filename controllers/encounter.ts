@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 import EncounterModel from "../models/encounter";
 import { Request, Response } from "express";
-import performEncSave from "../db/saveEnc";
+import performSave from "../db/save";
 import { sendFailRes } from "./utils";
 import { Document } from "mongoose";
 
@@ -13,7 +13,7 @@ const getAll = async (req: Request, res: Response) => {
   // const encounter = new EncounterModel(newEnc);
   // const success = (record: Document) => res.status(200).json(record);
   // const fail = (e: Error) => sendFailRes(res, e);
-  // await performEncSave(encounter, success, fail);
+  // await performSave(encounter, success, fail);
 };
 
 const getSingle = async (req: Request, res: Response) => {
@@ -24,7 +24,7 @@ const getSingle = async (req: Request, res: Response) => {
   // const encounter = new EncounterModel(newEnc);
   // const success = (record: Document) => res.status(200).json(record);
   // const fail = (e: Error) => sendFailRes(res, e);
-  // await performEncSave(encounter, success, fail);
+  // await performSave(encounter, success, fail);
 };
 
 const createEncounter = async (req: Request, res: Response) => {
@@ -35,7 +35,7 @@ const createEncounter = async (req: Request, res: Response) => {
   const encounter = new EncounterModel(newEnc);
   const success = (record: Document) => res.status(200).json(record);
   const fail = (e: Error) => sendFailRes(res, e);
-  await performEncSave(encounter, success, fail);
+  await performSave(encounter, success, fail);
 };
 
 const updateEncounter = async (req: Request, res: Response) => {
@@ -46,7 +46,7 @@ const updateEncounter = async (req: Request, res: Response) => {
   // const encounter = new EncounterModel(newEnc);
   // const success = (record: Document) => res.status(200).json(record);
   // const fail = (e: Error) => sendFailRes(res, e);
-  // await performEncSave(encounter, success, fail);
+  // await performSave(encounter, success, fail);
 };
 
 const deleteEncounter = async (req: Request, res: Response) => {
@@ -57,7 +57,7 @@ const deleteEncounter = async (req: Request, res: Response) => {
   // const encounter = new EncounterModel(newEnc);
   // const success = (record: Document) => res.status(200).json(record);
   // const fail = (e: Error) => sendFailRes(res, e);
-  // await performEncSave(encounter, success, fail);
+  // await performSave(encounter, success, fail);
 };
 
 export { getAll, getSingle, createEncounter, updateEncounter, deleteEncounter };

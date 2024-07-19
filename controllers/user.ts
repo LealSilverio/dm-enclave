@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 import UserModel from "../models/user";
 import { Request, Response } from "express";
-import performUserSave from "../db/saveUser";
+import performSave from "../db/save";
 import { sendFailRes } from "./utils";
 import { Document } from "mongoose";
 
@@ -13,7 +13,7 @@ const getAll = async (req: Request, res: Response) => {
   // const user = new UserModel(newUser);
   // const success = (record: Document) => res.status(200).json(record);
   // const fail = (e: Error) => sendFailRes(res, e);
-  // await performUserSave(user, success, fail);
+  // await performSave(user, success, fail);
 };
 
 const getSingle = async (req: Request, res: Response) => {
@@ -24,7 +24,7 @@ const getSingle = async (req: Request, res: Response) => {
   // const user = new UserModel(newUser);
   // const success = (record: Document) => res.status(200).json(record);
   // const fail = (e: Error) => sendFailRes(res, e);
-  // await performUserSave(user, success, fail);
+  // await performSave(user, success, fail);
 };
 
 const createUser = async (req: Request, res: Response) => {
@@ -35,7 +35,7 @@ const createUser = async (req: Request, res: Response) => {
   const user = new UserModel(newUser);
   const success = (record: Document) => res.status(200).json(record);
   const fail = (e: Error) => sendFailRes(res, e);
-  await performUserSave(user, success, fail);
+  await performSave(user, success, fail);
 };
 
 const updateUser = async (req: Request, res: Response) => {
@@ -46,7 +46,7 @@ const updateUser = async (req: Request, res: Response) => {
   // const user = new UserModel(newUser);
   // const success = (record: Document) => res.status(200).json(record);
   // const fail = (e: Error) => sendFailRes(res, e);
-  // await performUserSave(user, success, fail);
+  // await performSave(user, success, fail);
 };
 
 const deleteUser = async (req: Request, res: Response) => {
@@ -57,7 +57,7 @@ const deleteUser = async (req: Request, res: Response) => {
   // const user = new UserModel(newUser);
   // const success = (record: Document) => res.status(200).json(record);
   // const fail = (e: Error) => sendFailRes(res, e);
-  // await performUserSave(user, success, fail);
+  // await performSave(user, success, fail);
 };
 
 export { getAll, getSingle, createUser, updateUser, deleteUser };
