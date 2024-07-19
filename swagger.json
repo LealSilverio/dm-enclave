@@ -779,7 +779,7 @@
         "tags": [
           "user"
         ],
-        "summary": "Search by users who are loged out",
+        "summary": "Successful Log out",
         "produces": [
           "application/json"
         ],
