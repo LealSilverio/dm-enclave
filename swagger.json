@@ -38,29 +38,6 @@
         "produces": [
           "application/json"
         ],
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "class",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
             "description": "List of matching character records",
@@ -258,21 +235,8 @@
           "campaign"
         ],
         "summary": "Get all campaign records.",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Campaign"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -461,21 +425,8 @@
           "encounter"
         ],
         "summary": "Get all Encounter records.",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Encounter"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -666,23 +617,6 @@
         "summary": "Get all users",
         "produces": [
           "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
         ],
         "responses": {
           "200": {
