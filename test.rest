@@ -1,8 +1,33 @@
 @devHost = http://localhost:5000
 
-GET {{devHost}}/character/1
+GET {{devHost}}/character/all
+###
+# @prompt id
+get {{devHost}}/character/{{id}}
 ###
 POST {{devHost}}/character HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Legolas",
+  "level": 1,
+  "charClass": "Ranger",
+  "race": "Elf",
+  "type": "player",
+  "ownerId": "000000000000000000000000"
+}
+
+###
+GET {{devHost}}/character
+
+###
+GET {{devHost}}/character/1
+
+###
+GET {{devHost}}/character/search
+
+###
+POST {{devHost}}/character/
 content-type: application/json
 
 {
@@ -13,3 +38,47 @@ content-type: application/json
   "type": "player",
   "ownerId": "000000000000000000000000"
 }
+
+###
+PUT {{devHost}}/character/6699f2afdc9e2198e1070f18
+content-type: application/json
+
+{
+  "name": "Josh the Flatulent",
+  "level": 20,
+  "charClass": "Fighter",
+  "race": "Human",
+  "type": "player",
+  "ownerId": "000000000000000000000002"
+}
+
+###
+DELETE {{devHost}}/character/6699ec45b700814bef7f3d2e
+
+POST {{devHost}}/user/register HTTP/1.1
+content-type: application/json
+
+{
+  "username": "dmtest1",
+  "password": "password",
+  "email": "test1@dm.test",
+  "firstName": "testdm1",
+  "lastName": "user",
+  "type": "player",
+  "profilePicUrl": "https://en.wikipedia.org/wiki/Main_Page#/media/File:Big_Duck_2018_05.jpg"
+}
+
+####
+POST {{devHost}}/user/login HTTP/1.1
+content-type: application/json
+
+{
+  "email": "test1@dm.test",
+  "password": "password"
+}
+
+###
+# @prompt token
+GET {{devHost}}/user/protected
+Authorization: Bearer {{token}}
+
