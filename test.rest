@@ -18,18 +18,39 @@ content-type: application/json
 }
 
 ###
-get {{devHost}}/character/search?race=elf
+GET {{devHost}}/character
 
 ###
-# @prompt id
-# @prompt name
-PUT {{devHost}}/character/{{id}} HTTP/1.1
+GET {{devHost}}/character/1
+
+###
+GET {{devHost}}/character/search
+
+###
+POST {{devHost}}/character/
 content-type: application/json
 
 {
-  "name": "{{name}}"
+  "name": "Josh the Flatulent",
+  "level": 1,
+  "charClass": "Fighter",
+  "race": "Human",
+  "type": "player",
+  "ownerId": "000000000000000000000000"
 }
 
 ###
-# @prompt id
-DELETE {{devHost}}/character/{{id}}
+PUT {{devHost}}/character/6699f2afdc9e2198e1070f18
+content-type: application/json
+
+{
+  "name": "Josh the Flatulent",
+  "level": 20,
+  "charClass": "Fighter",
+  "race": "Human",
+  "type": "player",
+  "ownerId": "000000000000000000000002"
+}
+
+###
+DELETE {{devHost}}/character/6699ec45b700814bef7f3d2e

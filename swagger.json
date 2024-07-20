@@ -637,23 +637,26 @@
         "consumes": ["application/json"],
         "parameters": [
           {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
           },
           {
-            "name": "id",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "List of matching user records",
+            "description": "The modified character record",
             "schema": {
-              "$ref": "#/definitions/UserList"
+              "$ref": "#/definitions/Character"
             }
           },
           "400": {
@@ -678,7 +681,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The updated user record",
+            "description": "The created user record",
             "schema": {
               "$ref": "#/definitions/User"
             }
@@ -738,7 +741,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The updated user record",
+            "description": "Successfully logged in",
             "schema": {
               "$ref": "#/definitions/User"
             }
@@ -749,25 +752,30 @@
         }
       }
     },
-    "/user/{username}": {
+    "/user/logout": {
       "get": {
         "tags": ["user"],
         "summary": "Get a user record by username.",
         "produces": ["application/json"],
         "parameters": [
           {
-            "name": "username",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "User record identified by username",
+            "description": "List of matching user records",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/UserList"
             }
           },
           "400": {
@@ -787,21 +795,13 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
           }
         ],
         "responses": {
           "200": {
-            "description": "The modified character record",
+            "description": "User record identified by username",
             "schema": {
-              "$ref": "#/definitions/Character"
+              "$ref": "#/definitions/User"
             }
           },
           "400": {
