@@ -1,8 +1,7 @@
 import { HydratedDocument, Document } from "mongoose";
-import { Character } from "../types/character";
 
 const performSave = async (
-  entity: HydratedDocument<Character>,
+  entity: HydratedDocument<any>,
   success: (record?: Document) => void,
   fail: (e: Error) => void
 ) => {
@@ -10,9 +9,10 @@ const performSave = async (
     const savedRecord = await entity.save();
     if (!savedRecord) {
       fail(new Error("failure from inside perform save"));
+    } else {
+      success(savedRecord);
+      return savedRecord;
     }
-    success(savedRecord);
-    return savedRecord;
   } catch (e) {
     console.error(e);
     fail(e);

@@ -17,30 +17,111 @@
     },
     {
       "name": "encounter",
-      "description": "Encounters belong to campaigns. NPC characters or players belong to encounters."
+      "description": "[not-vetted]Encounters belong to campaigns. NPC characters or players belong to encounters."
     },
     {
       "name": "user",
-      "description": "Can be of type player or DM, players own sheets and belong to campaigns, DMs own campaigns."
+      "description": "[not-vetted]Can be of type player or DM, players own sheets and belong to campaigns, DMs own campaigns."
     }
   ],
-  "schemes": [
-    "https",
-    "http"
-  ],
+  "schemes": ["https", "http"],
   "paths": {
-    "/character": {
+    "/character/{characterId}": {
       "get": {
-        "tags": [
-          "character"
-        ],
-        "summary": "Get all characters",
-        "produces": [
-          "application/json"
+        "tags": ["character"],
+        "summary": "✅Get a character record by id.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
         ],
         "responses": {
           "200": {
-            "description": "List of matching character records",
+            "description": "Character record identified by id",
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "put": {
+        "tags": ["character"],
+        "summary": "✅Update a character record by id.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "new character data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Character"
+            },
+            "description": "if you don't want a certain attribute changed, don't include it in the body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The modified character record",
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["character"],
+        "summary": "✅Delete a character record by id.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The record that was deleted",
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/character/all": {
+      "get": {
+        "tags": ["character"],
+        "summary": "✅get a list of all characters",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "List of all character records",
             "schema": {
               "$ref": "#/definitions/CharacterList"
             }
@@ -49,18 +130,14 @@
             "description": "bad request"
           }
         }
-      },
+      }
+    },
+    "/character": {
       "post": {
-        "tags": [
-          "character"
-        ],
-        "summary": "Create a new character record.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["character"],
+        "summary": "✅Create a new character record.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "body",
@@ -86,17 +163,16 @@
     },
     "/character/search": {
       "get": {
-        "tags": [
-          "character"
-        ],
-        "summary": "Search for a character by name, class, or id",
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
+        "tags": ["character"],
+        "summary": "✅Search for a character by any attribute",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
         "parameters": [
+          {
+            "name": "id",
+            "required": false,
+            "type": "string"
+          },
           {
             "name": "name",
             "in": "query",
@@ -104,14 +180,27 @@
             "type": "string"
           },
           {
-            "name": "class",
-            "in": "query",
+            "name": "level",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "charClass",
             "required": false,
             "type": "string"
           },
           {
-            "name": "id",
-            "in": "query",
+            "name": "race",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ownerId",
             "required": false,
             "type": "string"
           }
@@ -129,135 +218,11 @@
         }
       }
     },
-    "/character/{characterId}": {
-      "get": {
-        "tags": [
-          "character"
-        ],
-        "summary": "Get a character record by id.",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "characterId",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Character record identified by id",
-            "schema": {
-              "$ref": "#/definitions/Character"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "character"
-        ],
-        "summary": "Update a character record by id.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "characterId",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Character"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The modified character record",
-            "schema": {
-              "$ref": "#/definitions/Character"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "character"
-        ],
-        "summary": "Delete a character record by id.",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "characterId",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The record that was deleted",
-            "schema": {
-              "$ref": "#/definitions/Character"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      }
-    },
     "/campaign/": {
-      "get": {
-        "tags": [
-          "campaign"
-        ],
-        "summary": "Get all campaign records.",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "List of campaign records",
-            "schema": {
-              "$ref": "#/definitions/Campaign"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      },
       "post": {
-        "tags": [
-          "campaign"
-        ],
-        "summary": "Create a campaign record.",
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["campaign"],
+        "summary": "[not-implemented]Create a campaign record.",
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "body",
@@ -283,17 +248,16 @@
     },
     "/campaign/search": {
       "get": {
-        "tags": [
-          "campaign"
-        ],
-        "summary": "Search for a campaign by name or id",
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
+        "tags": ["campaign"],
+        "summary": "[not-implemented]Search for a campaign by any attribute",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
         "parameters": [
+          {
+            "name": "id",
+            "required": false,
+            "type": "string"
+          },
           {
             "name": "name",
             "in": "query",
@@ -301,7 +265,7 @@
             "type": "string"
           },
           {
-            "name": "id",
+            "name": "ownerId",
             "required": false,
             "type": "string"
           }
@@ -321,13 +285,9 @@
     },
     "/campaign/{campaignId}": {
       "get": {
-        "tags": [
-          "campaign"
-        ],
-        "summary": "Get a campaign record by id.",
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["campaign"],
+        "summary": "[not-implemented]Get a campaign record by id.",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "campaignId",
@@ -350,16 +310,10 @@
         }
       },
       "put": {
-        "tags": [
-          "campaign"
-        ],
-        "summary": "Update a campaign record by id.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["campaign"],
+        "summary": "[not-vetted]Update a campaign record by id.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "campaignId",
@@ -390,13 +344,9 @@
         }
       },
       "delete": {
-        "tags": [
-          "campaign"
-        ],
-        "summary": "Delete a campaign record by id.",
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["campaign"],
+        "summary": "[not-vetted]Delete a campaign record by id.",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "campaignId",
@@ -421,12 +371,19 @@
     },
     "/encounter/": {
       "get": {
-        "tags": [
-          "encounter"
-        ],
-        "summary": "Get all Encounter records.",
-        "produces": [
-          "application/json"
+        "tags": ["encounter"],
+        "summary": "Search for an Encounter record.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -441,13 +398,9 @@
         }
       },
       "post": {
-        "tags": [
-          "encounter"
-        ],
+        "tags": ["encounter"],
         "summary": "Create an Encounter record.",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "body",
@@ -473,16 +426,10 @@
     },
     "/encounter/search": {
       "get": {
-        "tags": [
-          "encounter"
-        ],
+        "tags": ["encounter"],
         "summary": "Search for an Encounter by name or id",
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
         "parameters": [
           {
             "name": "name",
@@ -507,17 +454,40 @@
             "description": "bad request"
           }
         }
+      },
+      "put": {
+        "tags": ["encounter"],
+        "summary": "Update an encounter record.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated encounter record",
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
       }
     },
     "/encounter/{encounterId}": {
       "get": {
-        "tags": [
-          "encounter"
-        ],
+        "tags": ["encounter"],
         "summary": "Get an Encounter record by id.",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "encounterId",
@@ -540,16 +510,10 @@
         }
       },
       "put": {
-        "tags": [
-          "encounter"
-        ],
+        "tags": ["encounter"],
         "summary": "Update an encounter record by id.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "encounterId",
@@ -580,13 +544,9 @@
         }
       },
       "delete": {
-        "tags": [
-          "encounter"
-        ],
+        "tags": ["encounter"],
         "summary": "Delete an encounter record by id.",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "encounterId",
@@ -611,12 +571,23 @@
     },
     "/user": {
       "get": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Get all users",
-        "produces": [
-          "application/json"
+        "tags": ["user"],
+        "summary": "Search for all users",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -631,91 +602,10 @@
         }
       },
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Create a new user record.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The created user record",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Update a user record.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "username",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The modified character record",
-            "schema": {
-              "$ref": "#/definitions/Character"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      }
-    },
-    "/user/register": {
-      "post": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Create a new user.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "body",
@@ -740,17 +630,28 @@
       }
     },
     "/user/login": {
-      "post": {
-        "tags": [
-          "user"
-        ],
-        "summary": "create a user login.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+      "get": {
+        "tags": ["user"],
+        "summary": "Search by users who are loged in",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "The modified character record",
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "put": {
+        "tags": ["user"],
+        "summary": "Update a user record.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "body",
@@ -763,7 +664,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully logged in",
+            "description": "The created user record",
             "schema": {
               "$ref": "#/definitions/User"
             }
@@ -776,16 +677,10 @@
     },
     "/user/logout": {
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Search by users who are loged out",
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
         "parameters": [
           {
             "name": "name",
@@ -812,66 +707,6 @@
           }
         }
       }
-    },
-    "/user/{username}": {
-      "get": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Get a user record by username.",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "username",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "User record identified by username",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Delete a user record by username.",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "username",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The record that was deleted",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -881,19 +716,21 @@
         "name": {
           "type": "string"
         },
-        "class": {
+        "level": {
+          "type": "integer"
+        },
+        "CharClass": {
           "type": "string"
         },
-        "armorClass": {
-          "type": "integer",
-          "format": "int32"
+        "race": {
+          "type": "string"
         },
         "type": {
           "type": "string",
-          "enum": [
-            "player",
-            "npc"
-          ]
+          "enum": ["player", "npc"]
+        },
+        "ownerId": {
+          "type": "string"
         }
       }
     },
@@ -907,6 +744,9 @@
       "type": "object",
       "properties": {
         "name": {
+          "type": "string"
+        },
+        "ownerId": {
           "type": "string"
         }
       }
