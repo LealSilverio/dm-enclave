@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
   title: DM Enclave
   description: Do the D&D stuff
@@ -6,22 +6,112 @@ info:
 host: dm-enclave.onrender.com
 tags:
   - name: character
-    description: Character sheets. Can be of type player or NPC Belongs to a player or a campaign(if sheet is for NPC)
+    description: >-
+      Character sheets. Can be of type player or NPC Belongs to a player or a
+      campaign(if sheet is for NPC)
   - name: campaign
     description: Campaigns own players or characters(for NPCs) and belong to DMs.
   - name: encounter
-    description: Encounters belong to campaigns. NPC characters or players belong to encounters.
+    description: >-
+      [not-vetted]Encounters belong to campaigns. NPC characters or players belong to
+      encounters.
   - name: user
-    description: Can be of type player or DM, players own sheets and belong to campaigns, DMs own campaigns.
+    description: >-
+      [not-vetted]Can be of type player or DM, players own sheets and belong to campaigns,
+      DMs own campaigns.
 schemes:
   - https
   - http
 paths:
+  /character/{characterId}:
+    get:
+      tags:
+        - character
+      summary: ✅Get a character record by id.
+      produces:
+        - application/json
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Character record identified by id
+          schema:
+            $ref: "#/definitions/Character"
+        "400":
+          description: bad request
+    put:
+      tags:
+        - character
+      summary: "✅Update a character record by id."
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: new character data
+          required: true
+          schema:
+            $ref: "#/definitions/Character"
+          description: >-
+            if you don't want a certain attribute changed, don't include it in
+            the body
+      responses:
+        "200":
+          description: The modified character record
+          schema:
+            $ref: "#/definitions/Character"
+        "400":
+          description: bad request
+    delete:
+      tags:
+        - character
+      summary: "✅Delete a character record by id."
+      produces:
+        - application/json
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The record that was deleted
+          schema:
+            $ref: "#/definitions/Character"
+        "400":
+          description: bad request
+  /character/all:
+    get:
+      tags:
+        - character
+      summary: ✅get a list of all characters
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      responses:
+        "200":
+          description: List of all character records
+          schema:
+            $ref: "#/definitions/CharacterList"
+        "400":
+          description: bad request
   /character:
     post:
       tags:
         - character
-      summary: Create a new character record.
+      summary: ✅Create a new character record.
       consumes:
         - application/json
       produces:
@@ -31,19 +121,211 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Character'
+            $ref: "#/definitions/Character"
       responses:
-        '200':
+        "200":
           description: The created character record
           schema:
-            $ref: '#/definitions/Character'
-        '400':
+            $ref: "#/definitions/Character"
+        "400":
           description: bad request
   /character/search:
     get:
       tags:
         - character
-      summary: Search for a character by name, class, or id
+      summary: "✅Search for a character by any attribute"
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: id
+          required: false
+          type: string
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: level
+          required: false
+          type: integer
+        - name: charClass
+          required: false
+          type: string
+        - name: race
+          required: false
+          type: string
+        - name: type
+          required: false
+          type: string
+        - name: ownerId
+          required: false
+          type: string
+      responses:
+        "200":
+          description: List of matching character records
+          schema:
+            $ref: "#/definitions/CharacterList"
+        "400":
+          description: bad request
+  /campaign/:
+    post:
+      tags:
+        - campaign
+      summary: "[not-implemented]Create a campaign record."
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/Campaign"
+      responses:
+        "200":
+          description: "The record that was created"
+          schema:
+            $ref: "#/definitions/Campaign"
+        "400":
+          description: bad request
+  /campaign/search:
+    get:
+      tags:
+        - campaign
+      summary: "[not-implemented]Search for a campaign by any attribute"
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: id
+          required: false
+          type: string
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: ownerId
+          required: false
+          type: string
+      responses:
+        "200":
+          description: List of matching Campaign records
+          schema:
+            $ref: "#/definitions/CampaignList"
+        "400":
+          description: bad request
+  /campaign/{campaignId}:
+    get:
+      tags:
+        - campaign
+      summary: "[not-implemented]Get a campaign record by id."
+      produces:
+        - application/json
+      parameters:
+        - name: campaignId
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Campaign record identified by id
+          schema:
+            $ref: "#/definitions/Campaign"
+        "400":
+          description: bad request
+    put:
+      tags:
+        - campaign
+      summary: "[not-vetted]Update a campaign record by id."
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: campaignId
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/Campaign"
+      responses:
+        "200":
+          description: The modified campaign record
+          schema:
+            $ref: "#/definitions/Campaign"
+        "400":
+          description: bad request
+    delete:
+      tags:
+        - campaign
+      summary: "[not-vetted]Delete a campaign record by id."
+      produces:
+        - application/json
+      parameters:
+        - name: campaignId
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The record that was deleted
+          schema:
+            $ref: "#/definitions/Campaign"
+        "400":
+          description: bad request
+  /encounter/:
+    get:
+      tags:
+        - encounter
+      summary: Search for an Encounter record.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/Encounter"
+      responses:
+        "200":
+          description: List of Encounter records
+          schema:
+            $ref: "#/definitions/Encounter"
+        "400":
+          description: bad request
+    post:
+      tags:
+        - encounter
+      summary: Create an Encounter record.
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/Encounter"
+      responses:
+        "200":
+          description: The record that was created
+          schema:
+            $ref: "#/definitions/Encounter"
+        "400":
+          description: bad request
+  /encounter/search:
+    get:
+      tags:
+        - encounter
+      summary: Search for an Encounter by name or id
       produces:
         - application/json
       consumes:
@@ -53,7 +335,113 @@ paths:
           in: query
           required: false
           type: string
-        - name: class
+        - name: id
+          required: false
+          type: string
+      responses:
+        "200":
+          description: List of matching Encounter records
+          schema:
+            $ref: "#/definitions/EncounterList"
+        "400":
+          description: bad request
+    put:
+      tags:
+        - encounter
+      summary: Update an encounter record.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/Encounter"
+      responses:
+        "200":
+          description: The updated encounter record
+          schema:
+            $ref: "#/definitions/Encounter"
+        "400":
+          description: bad request
+  /encounter/{encounterId}:
+    get:
+      tags:
+        - encounter
+      summary: Get an Encounter record by id.
+      produces:
+        - application/json
+      parameters:
+        - name: encounterId
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Encounter record identified by id
+          schema:
+            $ref: "#/definitions/Encounter"
+        "400":
+          description: bad request
+    put:
+      tags:
+        - encounter
+      summary: Update an encounter record by id.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: encounterId
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/Encounter"
+      responses:
+        "200":
+          description: The modified encounter record
+          schema:
+            $ref: "#/definitions/Encounter"
+        "400":
+          description: bad request
+    delete:
+      tags:
+        - encounter
+      summary: Delete an encounter record by id.
+      produces:
+        - application/json
+      parameters:
+        - name: encounterId
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The record that was deleted
+          schema:
+            $ref: "#/definitions/Encounter"
+        "400":
+          description: bad request
+  /user:
+    get:
+      tags:
+        - user
+      summary: Search for all users
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: name
           in: query
           required: false
           type: string
@@ -62,103 +450,18 @@ paths:
           required: false
           type: string
       responses:
-        '200':
-          description: List of matching character records
+        "200":
+          description: List of matching user records
           schema:
-            $ref: '#/definitions/CharacterList'
-        '400':
-          description: bad request
-  /character/{characterId}:
-    get:
-      tags:
-        - character
-      summary: Get a character record by id.
-      produces:
-        - application/json
-      parameters:
-        - name: characterId
-          in: path
-          required: true
-          type: integer
-          format: int64
-      responses:
-        '200':
-          description: Character record identified by id
-          schema:
-            $ref: '#/definitions/Character'
-        '400':
-          description: bad request
-    put:
-      tags:
-        - character
-      summary: Update a character record by id.
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: characterId
-          in: path
-          required: true
-          type: integer
-          format: int64
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Character'
-      responses:
-        '200':
-          description: The modified character record
-          schema:
-            $ref: '#/definitions/Character'
-        '400':
-          description: bad request
-    delete:
-      tags:
-        - character
-      summary: Delete a character record by id.
-      produces:
-        - application/json
-      parameters:
-        - name: characterId
-          in: path
-          required: true
-          type: integer
-          format: int64
-      responses:
-        '200':
-          description: The record that was deleted
-          schema:
-            $ref: '#/definitions/Character'
-        '400':
-          description: bad request
-  /campaign/:
-    get:
-      tags:
-        - campaign
-      summary: Search for a campaign record.
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Campaign'
-      responses:
-        '200':
-          description: List of campaign records
-          schema:
-            $ref: '#/definitions/Campaign'
-        '400':
+            $ref: "#/definitions/UserList"
+        "400":
           description: bad request
     post:
       tags:
-        - campaign
-      summary: Create a campaign record.
+        - user
+      summary: Create a new user record.
+      consumes:
+        - application/json
       produces:
         - application/json
       parameters:
@@ -166,52 +469,170 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Campaign'
+            $ref: "#/definitions/User"
       responses:
-        '200':
-          description: The record that was created
+        "200":
+          description: The created user record
           schema:
-            $ref: '#/definitions/Campaign'
-        '400':
+            $ref: "#/definitions/User"
+        "400":
           description: bad request
-  /campaign/{campaignId}:
+  /user/login:
     get:
       tags:
-        - campaign
-      summary: Get a campaign record by id.
+        - user
+      summary: Search by users who are loged in
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: id
+          in: query
+          required: false
+          type: string
+      responses:
+        "200":
+          description: List of matching user records
+          schema:
+            $ref: "#/definitions/UserList"
+        "400":
+          description: bad request
+    put:
+      tags:
+        - user
+      summary: Update a user record.
+      consumes:
+        - application/json
       produces:
         - application/json
       parameters:
-        - name: campaignId
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: The updated user record
+          schema:
+            $ref: "#/definitions/User"
+        "400":
+          description: bad request
+  /user/logout:
+    get:
+      tags:
+        - user
+      summary: Search by users who are loged out
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: id
+          in: query
+          required: false
+          type: string
+      responses:
+        "200":
+          description: List of matching user records
+          schema:
+            $ref: "#/definitions/UserList"
+        "400":
+          description: bad request
+    put:
+      tags:
+        - user
+      summary: Update a user record.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: The updated user record
+          schema:
+            $ref: "#/definitions/User"
+        "400":
+          description: bad request
+  /user/{username}:
+    get:
+      tags:
+        - user
+      summary: Get a user record by username.
+      produces:
+        - application/json
+      parameters:
+        - name: username
           in: path
           required: true
           type: integer
           format: int64
       responses:
-        '200':
-          description: Campaign record identified by id
+        "200":
+          description: User record identified by username
           schema:
-            $ref: '#/definitions/Campaign'
-        '400':
+            $ref: "#/definitions/User"
+        "400":
+          description: bad request
+    put:
+      tags:
+        - user
+      summary: Update a user record by username.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: username
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: The modified character record
+          schema:
+            $ref: "#/definitions/Character"
+        "400":
           description: bad request
     delete:
       tags:
-        - campaign
-      summary: Delete a campaign record by id.
+        - user
+      summary: Delete a user record by username.
       produces:
         - application/json
       parameters:
-        - name: campaignId
+        - name: username
           in: path
           required: true
           type: integer
           format: int64
       responses:
-        '200':
+        "200":
           description: The record that was deleted
           schema:
-            $ref: '#/definitions/Campaign'
-        '400':
+            $ref: "#/definitions/User"
+        "400":
           description: bad request
 definitions:
   Character:
@@ -219,34 +640,43 @@ definitions:
     properties:
       name:
         type: string
-      class:
-        type: string
-      armorClass:
+      level:
         type: integer
-        format: int32
+      CharClass:
+        type: string
+      race:
+        type: string
       type:
         type: string
         enum:
           - player
           - npc
+      ownerId:
+        type: string
   CharacterList:
     type: array
     items:
-      $ref: '#/definitions/Character'
+      $ref: "#/definitions/Character"
   Campaign:
     type: object
     properties:
       name:
         type: string
+      ownerId:
+        type: string
   CampaignList:
     type: array
     items:
-      $ref: '#/definitions/Campaign'
-  Encounter: {}
+      $ref: "#/definitions/Campaign"
+  Encounter:
+    type: object
+    properties:
+      name:
+        type: string
   EncounterList:
     type: array
     items:
-      $ref: '#/definitions/Encounter'
+      $ref: "#/definitions/Encounter"
   User:
     type: object
     properties:
@@ -255,4 +685,4 @@ definitions:
   UserList:
     type: array
     items:
-      $ref: '#/definitions/User'
+      $ref: "#/definitions/User"

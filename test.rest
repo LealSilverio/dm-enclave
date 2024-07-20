@@ -1,15 +1,35 @@
 @devHost = http://localhost:5000
 
-GET {{devHost}}/character/1
+GET {{devHost}}/character/all
+###
+# @prompt id
+get {{devHost}}/character/{{id}}
 ###
 POST {{devHost}}/character HTTP/1.1
 content-type: application/json
 
 {
-  "name": "Josh the Flatulent",
+  "name": "Legolas",
   "level": 1,
-  "charClass": "Fighter",
-  "race": "Human",
+  "charClass": "Ranger",
+  "race": "Elf",
   "type": "player",
   "ownerId": "000000000000000000000000"
 }
+
+###
+get {{devHost}}/character/search?race=elf
+
+###
+# @prompt id
+# @prompt name
+PUT {{devHost}}/character/{{id}} HTTP/1.1
+content-type: application/json
+
+{
+  "name": "{{name}}"
+}
+
+###
+# @prompt id
+DELETE {{devHost}}/character/{{id}}

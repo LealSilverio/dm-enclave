@@ -1,16 +1,19 @@
-import { Router, Request, Response } from "express";
-import { createCharacter } from "../controllers/character";
+import { Router } from "express";
+import {
+  createCharacter,
+  getAll,
+  getSingle,
+  searchSingle,
+  updateCharacter,
+  deleteCharacter,
+} from "../controllers/character";
 const router = Router();
 
-const get1Character = (req: Request, res: Response) => {
-  res.status(200).send({
-    name: "Gandalf the Grey",
-    class: "Wizard",
-    armorClass: 10,
-    type: "player",
-  });
-};
-router.get("/1", get1Character);
+router.get("/all", getAll);
+router.get("/search", searchSingle);
+router.get("/:id", getSingle);
+router.put("/:id", updateCharacter);
 router.post("/", createCharacter);
+router.delete("/:id", deleteCharacter);
 
 export default router;
