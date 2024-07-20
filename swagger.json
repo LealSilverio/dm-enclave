@@ -123,7 +123,10 @@
           "200": {
             "description": "List of all character records",
             "schema": {
-              "$ref": "#/definitions/CharacterList"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Character"
+              }
             }
           },
           "400": {
@@ -209,7 +212,10 @@
           "200": {
             "description": "List of matching character records",
             "schema": {
-              "$ref": "#/definitions/CharacterList"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Character"
+              }
             }
           },
           "400": {
@@ -274,7 +280,10 @@
           "200": {
             "description": "List of matching Campaign records",
             "schema": {
-              "$ref": "#/definitions/CampaignList"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Campaign"
+              }
             }
           },
           "400": {
@@ -447,7 +456,10 @@
           "200": {
             "description": "List of matching Encounter records",
             "schema": {
-              "$ref": "#/definitions/EncounterList"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Encounter"
+              }
             }
           },
           "400": {
@@ -593,7 +605,10 @@
           "200": {
             "description": "List of matching user records",
             "schema": {
-              "$ref": "#/definitions/UserList"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
             }
           },
           "400": {
@@ -699,7 +714,10 @@
           "200": {
             "description": "List of matching user records",
             "schema": {
-              "$ref": "#/definitions/UserList"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
             }
           },
           "400": {
@@ -734,12 +752,6 @@
         }
       }
     },
-    "CharacterList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Character"
-      }
-    },
     "Campaign": {
       "type": "object",
       "properties": {
@@ -751,12 +763,6 @@
         }
       }
     },
-    "CampaignList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Campaign"
-      }
-    },
     "Encounter": {
       "type": "object",
       "properties": {
@@ -765,24 +771,12 @@
         }
       }
     },
-    "EncounterList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Encounter"
-      }
-    },
     "User": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string"
         }
-      }
-    },
-    "UserList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/User"
       }
     }
   }
