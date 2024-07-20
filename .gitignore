@@ -6,3 +6,5 @@ coverage/
 .env.*
 *-lock.json
 *-lock.yaml
+
+testToken
