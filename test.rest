@@ -13,3 +13,32 @@ content-type: application/json
   "type": "player",
   "ownerId": "000000000000000000000000"
 }
+
+###
+
+POST {{devHost}}/user/register HTTP/1.1
+content-type: application/json
+
+{
+  "username": "dmtest1",
+  "password": "password",
+  "email": "test1@dm.test",
+  "firstName": "testdm1",
+  "lastName": "user",
+  "type": "player",
+  "profilePicUrl": "https://en.wikipedia.org/wiki/Main_Page#/media/File:Big_Duck_2018_05.jpg"
+}
+
+####
+POST {{devHost}}/user/login HTTP/1.1
+content-type: application/json
+
+{
+  "email": "test1@dm.test",
+  "password": "password"
+}
+
+###
+# @prompt token
+GET {{devHost}}/user/protected
+Authorization: Bearer {{token}}
