@@ -61,7 +61,7 @@ const createCharacter = async (req: Request, res: Response) => {
     ownerId: ObjectId.createFromHexString(req.body.ownerId),
   };
   const character = new CharacterModel(newChar);
-  const success = (record: Document) => res.status(200).json(record);
+  const success = (record) => res.status(200).json(record);
   const fail = (e: Error) => sendFailRes(res, e);
   await performSave(character, success, fail);
 };
