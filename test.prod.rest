@@ -1,0 +1,92 @@
+@Host = https://dm-enclave.onrender.com
+
+GET {{Host}}/character/all
+
+###
+# @prompt id
+get {{Host}}/character/{{id}}
+
+###
+# @prompt name
+POST {{Host}}/character HTTP/1.1
+content-type: application/json
+
+{
+  "name": "{{name}}",
+  "level": 1,
+  "charClass": "Ranger",
+  "race": "Human",
+  "type": "player",
+  "ownerId": "000000000000000000000000"
+}
+
+###
+GET {{Host}}/character/search?race=human
+
+###
+# @prompt id
+PUT {{Host}}/character/{{id}} HTTP/1.1
+content-type: application/json
+
+{
+  "name": "eragon"
+}
+
+###
+# @prompt id
+DELETE {{Host}}/character/{{id}}
+
+###
+get {{Host}}/user/all
+
+###
+# @prompt number
+# @prompt type
+POST {{Host}}/user/register HTTP/1.1
+content-type: application/json
+
+{
+  "password": "password",
+  "email": "test{{number}}@dm.test",
+  "firstName": "testdm{{number}}",
+  "lastName": "user",
+  "type": "{{type}}",
+  "pictureUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Big_Duck_2018_05.jpg"
+}
+
+####
+# @prompt email
+POST {{Host}}/user/login HTTP/1.1
+content-type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "password"
+}
+
+###
+# @prompt id
+POST {{Host}}/user/{{id}} HTTP/1.1
+content-type: application/json
+
+{
+  "firstName": "testyguy2",
+  "type": "dm"
+}
+
+###
+GET {{Host}}/user/logout
+
+###
+# @prompt token
+GET {{Host}}/user/protected
+Authorization: Bearer {{token}}
+
+###
+POST {{Host}}/campaign HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "The Dragons of Great Dragon Dungeon",
+  "ownerId": "000000000000000000000000"
+}
