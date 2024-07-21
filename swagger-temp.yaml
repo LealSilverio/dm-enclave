@@ -416,7 +416,7 @@ paths:
     get:
       tags:
         - user
-      summary: "[not-implemented]get a user by id"
+      summary: ✅get a user by id
       produces:
         - application/json
       parameters:
@@ -477,28 +477,6 @@ paths:
             $ref: "#/definitions/User"
         "400":
           description: bad response
-  /user:
-    post:
-      tags:
-        - user
-      summary: "[not-implemented]Create a new user record."
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/User"
-      responses:
-        "200":
-          description: The created user record
-          schema:
-            $ref: "#/definitions/User"
-        "400":
-          description: bad request
   /user/all:
     get:
       tags:
@@ -530,7 +508,7 @@ paths:
     post:
       tags:
         - user
-      summary: "✅submit login credentials to get an auth token"
+      summary: ✅submit login credentials to get an auth token
       produces:
         - application/json
       consumes:
@@ -561,8 +539,8 @@ paths:
       tags:
         - user
       summary: >-
-        [partially-implemented]register a new user with application database and
-        auth identity provider
+        ✅Create a new character record and register it with id provider and
+        database
       parameters:
         - name: newUserData
           in: body
@@ -570,8 +548,6 @@ paths:
           schema:
             type: object
             properties:
-              username:
-                type: string
               password:
                 type: string
               email:
@@ -587,6 +563,9 @@ paths:
                   - dm
               profilePicUrl:
                 type: string
+          description: >-
+            all fields are required, type must be either 'player' or 'dm'.
+            password is stored only by auth0.
       produces:
         - application/json
       consumes:
@@ -596,6 +575,26 @@ paths:
           description: the created user record
           schema:
             $ref: "#/definitions/User"
+        "400":
+          description: bad request
+  /user/logout:
+    get:
+      tags:
+        - user
+      summary: "[not-implemented]submit a token to be invalidated"
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: authorization
+          description: "Bearer token"
+          in: header
+          required: true
+          type: string
+      responses:
+        "200":
+          description: token invalidated
         "400":
           description: bad request
 definitions:
@@ -632,5 +631,18 @@ definitions:
   User:
     type: object
     properties:
-      name:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      pictureUrl:
+        type: string
+      auth0Id:
+        type: string
+      type:
+        type: string
+        enum:
+          - player
+          - dm
+      email:
         type: string

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Character } from "../types/character";
+import UserModel from "./user";
 
 const CharacterSchema = new mongoose.Schema<Character>({
   name: {
@@ -55,7 +56,7 @@ const CharacterSchema = new mongoose.Schema<Character>({
   },
   ownerId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: UserModel,
     required: true,
   },
 });

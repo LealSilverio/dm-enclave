@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Campaign } from "../types/campaign";
+import UserModel from "./user";
 
 const CampaignSchema = new mongoose.Schema<Campaign>({
   name: {
@@ -8,7 +9,7 @@ const CampaignSchema = new mongoose.Schema<Campaign>({
   },
   ownerId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: UserModel,
     required: true,
   },
 });
