@@ -1,11 +1,10 @@
-
-import { ObjectId } from "mongodb";
 import UserModel from "../models/user";
 import { Request, Response } from "express";
 import performSave from "../db/save";
 import { sendFailRes } from "./utils";
-import { Document } from "mongoose";
 import axios, { AxiosRequestConfig } from "axios";
+import { User } from "../types/user";
+// import { performFind } from "../db/find";
 
 const getAll = async (req: Request, res: Response) => {
   // const newUser = {
@@ -18,26 +17,18 @@ const getAll = async (req: Request, res: Response) => {
   // await performSave(user, success, fail);
 };
 
-const getSingle = async (req: Request, res: Response) => {
-  // const newUser = {
-  //   ...req.body,
-  //   ownerId: ObjectId.createFromHexString(req.body.ownerId),
-  // };
-  // const user = new UserModel(newUser);
-  // const success = (record: Document) => res.status(200).json(record);
-  // const fail = (e: Error) => sendFailRes(res, e);
-  // await performSave(user, success, fail);
-};
-
-const createUser = async (req: Request, res: Response) => {
-  const newUser = {
-    ...req.body,
-    ownerId: ObjectId.createFromHexString(req.body.ownerId),
-  };
-  const user = new UserModel(newUser);
-  const success = (record: Document) => res.status(200).json(record);
-  const fail = (e: Error) => sendFailRes(res, e);
-  await performSave(user, success, fail);
+const getUserById = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      throw new Error("User not found");
+    } else {
+      res.status(200).send(user);
+    }
+  } catch (e) {
+    sendFailRes(res, e);
+  }
 };
 
 const updateUser = async (req: Request, res: Response) => {
@@ -63,8 +54,7 @@ const deleteUser = async (req: Request, res: Response) => {
 };
 
 const registerUser = async (req: Request, res: Response) => {
-  const { email, password, firstName, lastName, profilePicUrl, type } =
-    req.body;
+  const { email, password, firstName, lastName, pictureUrl, type } = req.body;
 
   const options: AxiosRequestConfig = {
     method: "post",
@@ -80,7 +70,7 @@ const registerUser = async (req: Request, res: Response) => {
       connection: process.env.AUTH0_DB,
       given_name: firstName,
       family_name: lastName,
-      picture: profilePicUrl,
+      picture: pictureUrl,
       user_metadata: {
         type,
       },
@@ -89,12 +79,27 @@ const registerUser = async (req: Request, res: Response) => {
   };
 
   try {
-    console.log(`options`, options);
     const authRes = await axios(options);
-    console.log(authRes.status, authRes.data, authRes.headers, authRes.config);
-    res.status(200).send(authRes.data);
+    const { email, given_name, family_name, picture, _id } = authRes.data;
+    const type = authRes.data.user_metadata.type;
+    const newUser: User = {
+      email,
+      firstName: given_name,
+      lastName: family_name,
+      pictureUrl: picture,
+      auth0Id: `auth0|${_id}`,
+      type,
+    };
+    const newUserRecord = await performSave(
+      new UserModel(newUser),
+      (record) => res.status(200).send(record),
+      (e) => sendFailRes(res, e)
+    );
+    if (!newUserRecord) {
+      throw new Error("Failed to save user to database");
+    }
   } catch (e) {
-    console.error(e);
+    sendFailRes(res, e);
   }
 };
 
@@ -129,4 +134,4 @@ const getToken = async (req: Request, res: Response) => {
   }
 };
 
-export { registerUser, getToken, getAll, getSingle, createUser, updateUser, deleteUser };
+export { registerUser, getToken, getAll, getUserById, updateUser, deleteUser };

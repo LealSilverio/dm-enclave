@@ -2,13 +2,29 @@ import mongoose from "mongoose";
 import { User } from "../types/user";
 
 const UserSchema = new mongoose.Schema<User>({
-  name: {
+  firstName: {
     type: String,
     required: true,
   },
-  ownerId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+  lastName: {
+    type: String,
+    required: true,
+  },
+  pictureUrl: {
+    type: String,
+    required: true,
+  },
+  auth0Id: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  type: {
+    type: String,
+    enum: ["player", "dm"],
     required: true,
   },
 });
