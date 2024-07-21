@@ -530,7 +530,7 @@ paths:
     post:
       tags:
         - user
-      summary: "[not-implemented]submit login credentials to get an auth token"
+      summary: "✅submit login credentials to get an auth token"
       produces:
         - application/json
       consumes:
