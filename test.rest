@@ -81,3 +81,12 @@ GET {{devHost}}/user/logout
 # @prompt token
 GET {{devHost}}/user/protected
 Authorization: Bearer {{token}}
+
+###
+POST {{devHost}}/campaign HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "The Dragons of Great Dragon Dungeon",
+  "ownerId": "000000000000000000000000"
+}
