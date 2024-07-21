@@ -17,11 +17,11 @@
     },
     {
       "name": "encounter",
-      "description": "[not-vetted]Encounters belong to campaigns. NPC characters or players belong to encounters."
+      "description": "Encounters belong to campaigns. NPC characters or players belong to encounters."
     },
     {
       "name": "user",
-      "description": "[not-vetted]Can be of type player or DM, players own sheets and belong to campaigns, DMs own campaigns."
+      "description": "Can be of type player or DM, players own sheets and belong to campaigns, DMs own campaigns."
     }
   ],
   "schemes": ["https", "http"],
@@ -224,6 +224,90 @@
         }
       }
     },
+    "/campaign/{campaignId}": {
+      "get": {
+        "tags": ["campaign"],
+        "summary": "[not-implemented]Get a campaign record by id.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Campaign record identified by id",
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "put": {
+        "tags": ["campaign"],
+        "summary": "[not-implemented]Update a campaign record by id.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "modifiedCampaignData",
+            "description": "Include only fields that you want changed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The modified campaign record",
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["campaign"],
+        "summary": "[not-implemented]Delete a campaign record by id.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The record that was deleted",
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
     "/campaign/": {
       "post": {
         "tags": ["campaign"],
@@ -292,25 +376,24 @@
         }
       }
     },
-    "/campaign/{campaignId}": {
+    "/encounter/{encounterId}": {
       "get": {
-        "tags": ["campaign"],
-        "summary": "[not-implemented]Get a campaign record by id.",
+        "tags": ["encounter"],
+        "summary": "[not-implemented]Get an Encounter record by encounterId.",
         "produces": ["application/json"],
         "parameters": [
           {
-            "name": "campaignId",
+            "name": "encounterId",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Campaign record identified by id",
+            "description": "Encounter record identified by encounterId",
             "schema": {
-              "$ref": "#/definitions/Campaign"
+              "$ref": "#/definitions/Encounter"
             }
           },
           "400": {
@@ -319,32 +402,32 @@
         }
       },
       "put": {
-        "tags": ["campaign"],
-        "summary": "[not-vetted]Update a campaign record by id.",
+        "tags": ["encounter"],
+        "summary": "[not-implemented]Update an encounter record by id.",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "parameters": [
           {
-            "name": "campaignId",
+            "name": "encounterId",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "modifiedEncounterData",
+            "description": "if you don't want a certain attribute changed, don't include it in the body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Campaign"
+              "$ref": "#/definitions/Encounter"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The modified campaign record",
+            "description": "The modified encounter record",
             "schema": {
-              "$ref": "#/definitions/Campaign"
+              "$ref": "#/definitions/Encounter"
             }
           },
           "400": {
@@ -353,23 +436,43 @@
         }
       },
       "delete": {
-        "tags": ["campaign"],
-        "summary": "[not-vetted]Delete a campaign record by id.",
+        "tags": ["encounter"],
+        "summary": "[not-implemented]Delete an encounter record by id.",
         "produces": ["application/json"],
         "parameters": [
           {
-            "name": "campaignId",
+            "name": "encounterId",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The record that was deleted",
             "schema": {
-              "$ref": "#/definitions/Campaign"
+              "$ref": "#/definitions/Encounter"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/encouter/all": {
+      "get": {
+        "tags": ["encounter"],
+        "summary": "[not-implemented]get a list of all encounters",
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "List of all encounters",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Encounter"
+              }
             }
           },
           "400": {
@@ -379,41 +482,14 @@
       }
     },
     "/encounter/": {
-      "get": {
-        "tags": ["encounter"],
-        "summary": "Search for an Encounter record.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Encounter"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of Encounter records",
-            "schema": {
-              "$ref": "#/definitions/Encounter"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      },
       "post": {
         "tags": ["encounter"],
-        "summary": "Create an Encounter record.",
+        "summary": "[not-implemented]Create an Encounter record.",
         "produces": ["application/json"],
         "parameters": [
           {
             "in": "body",
-            "name": "body",
+            "name": "newEncounter",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Encounter"
@@ -436,7 +512,7 @@
     "/encounter/search": {
       "get": {
         "tags": ["encounter"],
-        "summary": "Search for an Encounter by name or id",
+        "summary": "[not-implemented]Search for an Encounter by name or id",
         "produces": ["application/json"],
         "consumes": ["application/json"],
         "parameters": [
@@ -448,6 +524,7 @@
           },
           {
             "name": "id",
+            "in": "query",
             "required": false,
             "type": "string"
           }
@@ -466,54 +543,26 @@
             "description": "bad request"
           }
         }
-      },
-      "put": {
-        "tags": ["encounter"],
-        "summary": "Update an encounter record.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Encounter"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The updated encounter record",
-            "schema": {
-              "$ref": "#/definitions/Encounter"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
       }
     },
-    "/encounter/{encounterId}": {
+    "/user/{userId}": {
       "get": {
-        "tags": ["encounter"],
-        "summary": "Get an Encounter record by id.",
+        "tags": ["user"],
+        "summary": "[not-implemented]get a user by id",
         "produces": ["application/json"],
         "parameters": [
           {
-            "name": "encounterId",
+            "name": "userId",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Encounter record identified by id",
+            "description": "User identified by UserId",
             "schema": {
-              "$ref": "#/definitions/Encounter"
+              "$ref": "#/definitions/User"
             }
           },
           "400": {
@@ -522,32 +571,32 @@
         }
       },
       "put": {
-        "tags": ["encounter"],
-        "summary": "Update an encounter record by id.",
-        "consumes": ["application/json"],
+        "tags": ["user"],
+        "summary": "[not-impemented]update a user by id",
         "produces": ["application/json"],
+        "consumes": ["application/json"],
         "parameters": [
           {
-            "name": "encounterId",
+            "name": "userId",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           },
           {
+            "name": "modifiedUserData",
             "in": "body",
-            "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Encounter"
-            }
+              "$ref": "#/definitions/User"
+            },
+            "description": "if you don't want a certain attribute changed, don't include it in the body"
           }
         ],
         "responses": {
           "200": {
-            "description": "The modified encounter record",
+            "description": "the modified user record",
             "schema": {
-              "$ref": "#/definitions/Encounter"
+              "$ref": "#/definitions/User"
             }
           },
           "400": {
@@ -556,23 +605,51 @@
         }
       },
       "delete": {
-        "tags": ["encounter"],
-        "summary": "Delete an encounter record by id.",
+        "tags": ["user"],
+        "summary": "[not-implemented]delete a user. note: you can/'t leave orphans",
         "produces": ["application/json"],
         "parameters": [
           {
-            "name": "encounterId",
+            "name": "userId",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The record that was deleted",
+            "description": "the deleted user record",
             "schema": {
-              "$ref": "#/definitions/Encounter"
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "bad response"
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "tags": ["user"],
+        "summary": "[not-implemented]Create a new user record.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The created user record",
+            "schema": {
+              "$ref": "#/definitions/User"
             }
           },
           "400": {
@@ -581,10 +658,10 @@
         }
       }
     },
-    "/user": {
+    "/user/all": {
       "get": {
         "tags": ["user"],
-        "summary": "Search for all users",
+        "summary": "[not-implemented]get all users",
         "produces": ["application/json"],
         "consumes": ["application/json"],
         "parameters": [
@@ -603,39 +680,12 @@
         ],
         "responses": {
           "200": {
-            "description": "List of matching user records",
+            "description": "List of all user records",
             "schema": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/User"
               }
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      },
-      "post": {
-        "tags": ["user"],
-        "summary": "Create a new user record.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The created user record",
-            "schema": {
-              "$ref": "#/definitions/User"
             }
           },
           "400": {
@@ -645,79 +695,92 @@
       }
     },
     "/user/login": {
-      "get": {
+      "post": {
         "tags": ["user"],
-        "summary": "Search by users who are loged in",
+        "summary": "[not-implemented]submit login credentials to get an auth token",
         "produces": ["application/json"],
         "consumes": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "The modified character record",
-            "schema": {
-              "$ref": "#/definitions/Character"
-            }
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      },
-      "put": {
-        "tags": ["user"],
-        "summary": "Update a user record.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
         "parameters": [
           {
+            "name": "credentials",
             "in": "body",
-            "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The created user record",
+            "description": "an object containing the auth token",
             "schema": {
-              "$ref": "#/definitions/User"
+              "type": "object",
+              "properties": {
+                "access_token": {
+                  "type": "string"
+                }
+              }
             }
           },
           "400": {
-            "description": "bad request"
+            "description": "bad response"
           }
         }
       }
     },
-    "/user/logout": {
-      "get": {
+    "/user/register": {
+      "post": {
         "tags": ["user"],
-        "summary": "Search by users who are loged out",
-        "produces": ["application/json"],
-        "consumes": ["application/json"],
+        "summary": "[partially-implemented]register a new user with application database and auth identity provider",
         "parameters": [
           {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "newUserData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": ["player", "dm"]
+                },
+                "profilePicUrl": {
+                  "type": "string"
+                }
+              }
+            }
           }
         ],
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
         "responses": {
           "200": {
-            "description": "List of matching user records",
+            "description": "the created user record",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
-              }
+              "$ref": "#/definitions/User"
             }
           },
           "400": {
