@@ -1,15 +1,18 @@
 @devHost = http://localhost:5000
 
 GET {{devHost}}/character/all
+
 ###
 # @prompt id
 get {{devHost}}/character/{{id}}
+
 ###
+# @prompt name
 POST {{devHost}}/character HTTP/1.1
 content-type: application/json
 
 {
-  "name": "Legolas",
+  "name": "{{name}}",
   "level": 1,
   "charClass": "Ranger",
   "race": "Elf",
@@ -18,44 +21,27 @@ content-type: application/json
 }
 
 ###
-GET {{devHost}}/character
-
-###
-GET {{devHost}}/character/1
-
-###
 GET {{devHost}}/character/search
 
 ###
-POST {{devHost}}/character/
+# @prompt id
+PUT {{devHost}}/character/{{id}} HTTP/1.1
 content-type: application/json
 
 {
-  "name": "Josh the Flatulent",
-  "level": 1,
-  "charClass": "Fighter",
-  "race": "Human",
-  "type": "player",
-  "ownerId": "000000000000000000000000"
+  "name": "derek"
 }
 
 ###
-PUT {{devHost}}/character/6699f2afdc9e2198e1070f18
-content-type: application/json
-
-{
-  "name": "Josh the Flatulent",
-  "level": 20,
-  "charClass": "Fighter",
-  "race": "Human",
-  "type": "player",
-  "ownerId": "000000000000000000000002"
-}
+# @prompt id
+DELETE {{devHost}}/character/{{id}}
 
 ###
-DELETE {{devHost}}/character/6699ec45b700814bef7f3d2e
+get {{devHost}}/user/all
+
 ###
 # @prompt number
+# @prompt type
 POST {{devHost}}/user/register HTTP/1.1
 content-type: application/json
 
@@ -64,18 +50,32 @@ content-type: application/json
   "email": "test{{number}}@dm.test",
   "firstName": "testdm{{number}}",
   "lastName": "user",
-  "type": "player",
+  "type": "{{type}}",
   "pictureUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Big_Duck_2018_05.jpg"
 }
 
 ####
+# @prompt email
 POST {{devHost}}/user/login HTTP/1.1
 content-type: application/json
 
 {
-  "email": "test2@dm.test",
+  "email": "{{email}}",
   "password": "password"
 }
+
+###
+# @prompt id
+POST {{devHost}}/user/{{id}} HTTP/1.1
+content-type: application/json
+
+{
+  "firstName": "testy1",
+  "type": "dm"
+}
+
+###
+GET {{devHost}}/user/logout
 
 ###
 # @prompt token

@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
   title: DM Enclave
   description: Do the D&D stuff
@@ -37,11 +37,11 @@ paths:
           type: integer
           format: int64
       responses:
-        '200':
+        "200":
           description: Character record identified by id
           schema:
-            $ref: '#/definitions/Character'
-        '400':
+            $ref: "#/definitions/Character"
+        "400":
           description: bad request
     put:
       tags:
@@ -61,16 +61,16 @@ paths:
           name: new character data
           required: true
           schema:
-            $ref: '#/definitions/Character'
+            $ref: "#/definitions/Character"
           description: >-
             if you don't want a certain attribute changed, don't include it in
             the body
       responses:
-        '200':
+        "200":
           description: The modified character record
           schema:
-            $ref: '#/definitions/Character'
-        '400':
+            $ref: "#/definitions/Character"
+        "400":
           description: bad request
     delete:
       tags:
@@ -85,11 +85,11 @@ paths:
           type: integer
           format: int64
       responses:
-        '200':
+        "200":
           description: The record that was deleted
           schema:
-            $ref: '#/definitions/Character'
-        '400':
+            $ref: "#/definitions/Character"
+        "400":
           description: bad request
   /character/all:
     get:
@@ -101,13 +101,13 @@ paths:
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: List of all character records
           schema:
             type: array
             items:
-              $ref: '#/definitions/Character'
-        '400':
+              $ref: "#/definitions/Character"
+        "400":
           description: bad request
   /character:
     post:
@@ -123,13 +123,13 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Character'
+            $ref: "#/definitions/Character"
       responses:
-        '200':
+        "200":
           description: The created character record
           schema:
-            $ref: '#/definitions/Character'
-        '400':
+            $ref: "#/definitions/Character"
+        "400":
           description: bad request
   /character/search:
     get:
@@ -164,19 +164,19 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: List of matching character records
           schema:
             type: array
             items:
-              $ref: '#/definitions/Character'
-        '400':
+              $ref: "#/definitions/Character"
+        "400":
           description: bad request
   /campaign/{campaignId}:
     get:
       tags:
         - campaign
-      summary: '[not-implemented]Get a campaign record by id.'
+      summary: "[not-implemented]Get a campaign record by id."
       produces:
         - application/json
       parameters:
@@ -185,16 +185,16 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Campaign record identified by id
           schema:
-            $ref: '#/definitions/Campaign'
-        '400':
+            $ref: "#/definitions/Campaign"
+        "400":
           description: bad request
     put:
       tags:
         - campaign
-      summary: '[not-implemented]Update a campaign record by id.'
+      summary: "[not-implemented]Update a campaign record by id."
       consumes:
         - application/json
       produces:
@@ -209,18 +209,18 @@ paths:
           description: Include only fields that you want changed.
           required: true
           schema:
-            $ref: '#/definitions/Campaign'
+            $ref: "#/definitions/Campaign"
       responses:
-        '200':
+        "200":
           description: The modified campaign record
           schema:
-            $ref: '#/definitions/Campaign'
-        '400':
+            $ref: "#/definitions/Campaign"
+        "400":
           description: bad request
     delete:
       tags:
         - campaign
-      summary: '[not-implemented]Delete a campaign record by id.'
+      summary: "[not-implemented]Delete a campaign record by id."
       produces:
         - application/json
       parameters:
@@ -229,17 +229,17 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The record that was deleted
           schema:
-            $ref: '#/definitions/Campaign'
-        '400':
+            $ref: "#/definitions/Campaign"
+        "400":
           description: bad request
   /campaign/:
     post:
       tags:
         - campaign
-      summary: '[not-implemented]Create a campaign record.'
+      summary: "[not-implemented]Create a campaign record."
       produces:
         - application/json
       parameters:
@@ -247,19 +247,19 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Campaign'
+            $ref: "#/definitions/Campaign"
       responses:
-        '200':
+        "200":
           description: The record that was created
           schema:
-            $ref: '#/definitions/Campaign'
-        '400':
+            $ref: "#/definitions/Campaign"
+        "400":
           description: bad request
   /campaign/search:
     get:
       tags:
         - campaign
-      summary: '[not-implemented]Search for a campaign by any attribute'
+      summary: "[not-implemented]Search for a campaign by any attribute"
       produces:
         - application/json
       consumes:
@@ -276,19 +276,19 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: List of matching Campaign records
           schema:
             type: array
             items:
-              $ref: '#/definitions/Campaign'
-        '400':
+              $ref: "#/definitions/Campaign"
+        "400":
           description: bad request
   /encounter/{encounterId}:
     get:
       tags:
         - encounter
-      summary: '[not-implemented]Get an Encounter record by encounterId.'
+      summary: "[not-implemented]Get an Encounter record by encounterId."
       produces:
         - application/json
       parameters:
@@ -297,16 +297,16 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Encounter record identified by encounterId
           schema:
-            $ref: '#/definitions/Encounter'
-        '400':
+            $ref: "#/definitions/Encounter"
+        "400":
           description: bad request
     put:
       tags:
         - encounter
-      summary: '[not-implemented]Update an encounter record by id.'
+      summary: "[not-implemented]Update an encounter record by id."
       consumes:
         - application/json
       produces:
@@ -323,18 +323,18 @@ paths:
             the body
           required: true
           schema:
-            $ref: '#/definitions/Encounter'
+            $ref: "#/definitions/Encounter"
       responses:
-        '200':
+        "200":
           description: The modified encounter record
           schema:
-            $ref: '#/definitions/Encounter'
-        '400':
+            $ref: "#/definitions/Encounter"
+        "400":
           description: bad request
     delete:
       tags:
         - encounter
-      summary: '[not-implemented]Delete an encounter record by id.'
+      summary: "[not-implemented]Delete an encounter record by id."
       produces:
         - application/json
       parameters:
@@ -343,33 +343,33 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The record that was deleted
           schema:
-            $ref: '#/definitions/Encounter'
-        '400':
+            $ref: "#/definitions/Encounter"
+        "400":
           description: bad request
   /encouter/all:
     get:
       tags:
         - encounter
-      summary: '[not-implemented]get a list of all encounters'
+      summary: "[not-implemented]get a list of all encounters"
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: List of all encounters
           schema:
             type: array
             items:
-              $ref: '#/definitions/Encounter'
-        '400':
+              $ref: "#/definitions/Encounter"
+        "400":
           description: bad request
   /encounter/:
     post:
       tags:
         - encounter
-      summary: '[not-implemented]Create an Encounter record.'
+      summary: "[not-implemented]Create an Encounter record."
       produces:
         - application/json
       parameters:
@@ -377,19 +377,19 @@ paths:
           name: newEncounter
           required: true
           schema:
-            $ref: '#/definitions/Encounter'
+            $ref: "#/definitions/Encounter"
       responses:
-        '200':
+        "200":
           description: The record that was created
           schema:
-            $ref: '#/definitions/Encounter'
-        '400':
+            $ref: "#/definitions/Encounter"
+        "400":
           description: bad request
   /encounter/search:
     get:
       tags:
         - encounter
-      summary: '[not-implemented]Search for an Encounter by name or id'
+      summary: "[not-implemented]Search for an Encounter by name or id"
       produces:
         - application/json
       consumes:
@@ -404,13 +404,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: List of matching Encounter records
           schema:
             type: array
             items:
-              $ref: '#/definitions/Encounter'
-        '400':
+              $ref: "#/definitions/Encounter"
+        "400":
           description: bad request
   /user/{userId}:
     get:
@@ -425,16 +425,16 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: User identified by UserId
           schema:
-            $ref: '#/definitions/User'
-        '400':
+            $ref: "#/definitions/User"
+        "400":
           description: bad request
     put:
       tags:
         - user
-      summary: '[not-impemented]update a user by id'
+      summary: "[not-impemented]update a user by id"
       produces:
         - application/json
       consumes:
@@ -448,21 +448,21 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
           description: >-
             if you don't want a certain attribute changed, don't include it in
             the body
       responses:
-        '200':
+        "200":
           description: the modified user record
           schema:
-            $ref: '#/definitions/User'
-        '400':
+            $ref: "#/definitions/User"
+        "400":
           description: bad request
     delete:
       tags:
         - user
-      summary: '[not-implemented]delete a user. note: you can/''t leave orphans'
+      summary: "[not-implemented]delete a user. note: you can/'t leave orphans"
       produces:
         - application/json
       parameters:
@@ -471,17 +471,17 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: the deleted user record
           schema:
-            $ref: '#/definitions/User'
-        '400':
+            $ref: "#/definitions/User"
+        "400":
           description: bad response
   /user/all:
     get:
       tags:
         - user
-      summary: '[not-implemented]get all users'
+      summary: "[not-implemented]get all users"
       produces:
         - application/json
       consumes:
@@ -496,13 +496,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: List of all user records
           schema:
             type: array
             items:
-              $ref: '#/definitions/User'
-        '400':
+              $ref: "#/definitions/User"
+        "400":
           description: bad request
   /user/login:
     post:
@@ -525,14 +525,14 @@ paths:
               password:
                 type: string
       responses:
-        '200':
+        "200":
           description: an object containing the auth token
           schema:
             type: object
             properties:
               access_token:
                 type: string
-        '400':
+        "400":
           description: bad response
   /user/register:
     post:
@@ -571,11 +571,31 @@ paths:
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: the created user record
           schema:
-            $ref: '#/definitions/User'
-        '400':
+            $ref: "#/definitions/User"
+        "400":
+          description: bad request
+  /user/logout:
+    get:
+      tags:
+        - user
+      summary: "[not-implemented]submit a token to be invalidated"
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: authorization
+          description: "Bearer token"
+          in: header
+          required: true
+          type: string
+      responses:
+        "200":
+          description: token invalidated
+        "400":
           description: bad request
 definitions:
   Character:

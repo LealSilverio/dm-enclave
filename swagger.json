@@ -757,6 +757,31 @@
           }
         }
       }
+    },
+    "/user/logout": {
+      "get": {
+        "tags": ["user"],
+        "summary": "[not-implemented]submit a token to be invalidated",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "description": "Bearer token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "token invalidated"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
     }
   },
   "definitions": {
